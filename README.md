@@ -2,7 +2,7 @@
 
 **Can we connect AI to the software we already have?** An open, source-linked catalogue of 25 business software systems for UK integration scoping, maintained by [Generativ](https://www.generativ.co.uk/).
 
-[Search the database](https://www.generativ.co.uk/resources/software-integration-database) · [JSON](data/integrations.json) · [CSV](data/systems.csv) · [Contribute](CONTRIBUTING.md)
+[Search the database](https://www.generativ.co.uk/resources/software-integration-database) · [JSON](data/integrations.json) · [CSV](data/systems.csv) · [Kaggle analysis dataset](https://www.kaggle.com/datasets/hellogenerativ/uk-business-software-ai-integration-database) · [Contribute](CONTRIBUTING.md)
 
 ## What this release covers
 
@@ -53,3 +53,7 @@ Original catalogue and analysis: **CC BY 4.0**. Code: **MIT**. Vendor documentat
 Suggested citation: Generativ (2026), *UK Business Software AI Integration Database*, version 2026-10-16, https://www.generativ.co.uk/resources/software-integration-database. Include the version or access date and identify changes when redistributing.
 
 See [contribution instructions](CONTRIBUTING.md) to submit corrections or reproducible test evidence. Updates are reviewed; this is a dated snapshot, not a real-time vendor status feed.
+
+## Discovery backlog
+
+Zapier and n8n connector directories help identify additional candidates. A listing does not establish direct API entitlement, endpoint coverage or a tested connection. See [the sourced expansion backlog](EXPANSION_BACKLOG.md); each candidate needs its own official vendor documentation review before entering the main dataset.
