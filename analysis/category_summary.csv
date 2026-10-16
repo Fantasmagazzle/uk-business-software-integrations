@@ -1,0 +1,9 @@
+category,systems,http_webhooks,conditional_webhooks,event_stream,webhooks_unconfirmed,tested_connections
+Accounting,4,2,0,0,2,0
+CRM,4,2,1,1,0,0
+Commerce,2,2,0,0,0,0
+Customer support,2,1,1,0,0,0
+Field service,1,0,0,0,1,0
+Marketing,2,1,1,0,0,0
+Productivity,5,5,0,0,0,0
+Work management,5,5,0,0,0,0

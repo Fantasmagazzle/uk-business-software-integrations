@@ -1,0 +1,30 @@
+system_id,entity,read,create,update,notes,source_ids,verification_status
+airtable,Table records,true,true,true,Only bases/tables granted to the token; computed fields are not ordinary writable fields.,airtable-1 | airtable-3,not_tested
+asana,Tasks,true,true,true,Task CRUD is documented; access depends on project/workspace permissions.,asana-1,not_tested
+bigchange,Contacts,true,true,true,contacts:read and contacts:write govern the corresponding operations.,bigchange-3,not_tested
+bigchange,Persons,true,true,true,Uses contacts:persons:read/write scopes; consent operations are separately documented.,bigchange-4,not_tested
+clickup,Tasks,true,true,true,Supported task fields; custom fields can require a separate endpoint.,clickup-1 | clickup-6 | clickup-7,not_tested
+freeagent,Invoices,true,true,true,Requires the Estimates and Invoices access level; status-specific operations apply.,freeagent-3,not_tested
+freshdesk,Tickets,true,true,true,"Includes ticket updates, replies and notes; endpoint/role restrictions apply.",freshdesk-1,not_tested
+freshdesk,Contacts,true,true,true,Contact operations are documented separately from ticket permissions.,freshdesk-1,not_tested
+google-workspace,Drive files,true,true,true,File content/metadata operations depend on OAuth scope and the user’s file permissions.,google-workspace-1 | google-workspace-3,not_tested
+hubspot,Contacts,true,true,true,Core CRM contact properties; premium properties/features can have separate entitlements.,hubspot-1,not_tested
+jira-cloud,Issues,true,true,true,Browse/Create/Edit permissions and field configuration constrain each operation; rich text uses Atlassian Document Format.,jira-cloud-1 | jira-cloud-2,not_tested
+klaviyo,Profiles,true,true,true,Profile properties can be maintained through the API; subscriptions/consent use dedicated operations.,klaviyo-1,not_tested
+mailchimp,Audience contacts,true,true,true,Import/export and update audience members; subscription status must reflect actual consent.,mailchimp-1,not_tested
+microsoft-365,Outlook calendar events,true,true,true,Calendars.ReadWrite permits event creation and changes; mailbox scope matters.,microsoft-365-1,not_tested
+microsoft-365,Mail messages,true,true,true,Mail.ReadWrite covers mailbox changes but does not itself permit sending; Mail.Send is separate.,microsoft-365-1,not_tested
+monday,Board items,true,true,true,Read/create items; update item column values using the appropriate column mutation and data format.,monday-1 | monday-5,not_tested
+notion,Pages and page properties,true,unknown,true,Content permissions and the selected API version govern operations; some computed properties are not writable. Page creation is outside this entry’s reviewed operation scope.,notion-1 | notion-4 | notion-5,not_tested
+pipedrive,Deals,true,true,true,Use the current Deals endpoints and required fields.,pipedrive-1,not_tested
+quickbooks-online,Invoices,true,true,true,"Updates require the current SyncToken. Required customer and line fields, locale and company preferences matter.",quickbooks-online-1,not_tested
+sage-accounting,Sales invoices,true,true,true,Draft/pro forma release and payment allocation use separate operations; invoice state limits changes.,sage-accounting-1,not_tested
+salesforce,Standard and custom object records,true,true,true,Only objects/fields exposed to the authorised user; check the specific object’s supported operations.,salesforce-1,not_tested
+shopify,Products,true,true,true,GraphQL product queries and mutations; variant operations and permissions are separate.,shopify-1 | shopify-5,not_tested
+slack,Conversation messages,true,true,true,History needs the appropriate history scope. Posting/editing requires chat scopes and editing rights for the message.,slack-1 | slack-4 | slack-5,not_tested
+trello,Cards,true,true,true,Read/create/update cards within authorised boards.,trello-1,not_tested
+woocommerce,Orders,true,true,true,REST resource operations and user permissions apply.,woocommerce-1,not_tested
+woocommerce,Products,true,true,true,Core product resource; extension-specific metadata may need separate handling.,woocommerce-3 | woocommerce-1,not_tested
+xero,Invoices,true,true,true,Write permissions and invoice status affect which changes are allowed.,xero-1,not_tested
+zendesk,Tickets,true,true,true,"Ticket properties/comments subject to role, field and endpoint restrictions.",zendesk-1,not_tested
+zoho-crm,CRM module records,true,true,true,"Examples include leads, contacts and deals; the module and field must support the requested operation.",zoho-crm-1 | zoho-crm-5 | zoho-crm-6,not_tested

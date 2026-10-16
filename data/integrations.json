@@ -1,0 +1,2493 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "2026-10-16",
+  "title": "UK Business Software AI Integration Database",
+  "publisher": "Generativ",
+  "canonical_url": "https://www.generativ.co.uk/resources/software-integration-database",
+  "licence": "CC-BY-4.0",
+  "selection_method": "Editorial starter sample for UK business integration scoping; not a market-share survey, endorsement or exhaustive API catalogue.",
+  "evidence_policy": "Vendor-documented capabilities are distinct from executed integration tests. Unknown values do not mean unavailable. AI use cases are Generativ editorial examples, not tested deployments.",
+  "systems": [
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "category": "Productivity",
+      "product_scope": "Web API for base records and metadata; Enterprise admin functions are separate.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "airtable-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free, Team, Business and Enterprise Scale",
+        "notes": "Core Web API is available on all plans. Monthly allowances: Free 1,000; Team 100,000; Business/Enterprise no monthly call cap, still rate limited.",
+        "source_ids": [
+          "airtable-1"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Webhooks API notifies about changes to base records, fields and view membership. It is distinct from incoming automation webhooks.",
+        "source_ids": [
+          "airtable-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal access token",
+          "OAuth 2.0"
+        ],
+        "notes": "Token scopes and selected bases must match the user’s permissions. Legacy user API keys no longer work.",
+        "source_ids": [
+          "airtable-2"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Table records",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Only bases/tables granted to the token; computed fields are not ordinary writable fields.",
+          "source_ids": [
+            "airtable-1",
+            "airtable-3"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "5 requests/second per base on all pricing tiers; list responses are paginated at up to 100 records.",
+          "source_ids": [
+            "airtable-1"
+          ]
+        }
+      ],
+      "ai_use_case": "Categorise incoming requests and suggest values for an operations table.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "airtable-1",
+          "title": "Web API access and limits",
+          "url": "https://support.airtable.com/articles/6292134965-getting-started-with-airtable-s-web-api",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "airtable-2",
+          "title": "Personal access tokens",
+          "url": "https://support.airtable.com/articles/9934989703-creating-personal-access-tokens",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "airtable-3",
+          "title": "Webhooks API overview",
+          "url": "https://support.airtable.com/articles/7385030819-airtable-webhooks-api-overview",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "asana",
+      "name": "Asana",
+      "category": "Work management",
+      "product_scope": "Tasks/projects REST API; premium resource features retain their plan requirements.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "asana-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free and paid accounts",
+        "notes": "Free accounts can use the API. Paid-only product features are not unlocked by having a developer token.",
+        "source_ids": [
+          "asana-2",
+          "asana-3"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Task/project webhooks use an HTTPS receiver and handshake; events remain tied to the creating user/token’s access.",
+        "source_ids": [
+          "asana-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal access token",
+          "OAuth 2.0"
+        ],
+        "notes": "PATs inherit user permissions. Use OAuth for apps acting for other users; view-only users have limited API access.",
+        "source_ids": [
+          "asana-5"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Tasks",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Task CRUD is documented; access depends on project/workspace permissions.",
+          "source_ids": [
+            "asana-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "150 requests/minute on free domains; 1,500 on paid domains, per token. Search and concurrent operations have additional limits.",
+          "source_ids": [
+            "asana-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Extract proposed actions from an approved brief and create tasks after review.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "asana-1",
+          "title": "API FAQ: task CRUD",
+          "url": "https://developers.asana.com/docs/faq",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "asana-2",
+          "title": "Rate limits",
+          "url": "https://developers.asana.com/docs/rate-limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "asana-3",
+          "title": "Build an app",
+          "url": "https://developers.asana.com/docs/overview",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "asana-4",
+          "title": "Webhooks guide",
+          "url": "https://developers.asana.com/docs/webhooks-guide",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "asana-5",
+          "title": "Authentication",
+          "url": "https://developers.asana.com/docs/authentication",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "bigchange",
+      "name": "BigChange",
+      "category": "Field service",
+      "product_scope": "Modern REST API. Legacy JobWatch Web Services and DaaS are different products.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "bigchange-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "REST API licence; confirm contract",
+        "notes": "The usage policy says REST API access is priced on usage and refers to the customer’s licence details. A universal included subscription tier is not established.",
+        "source_ids": [
+          "bigchange-2"
+        ]
+      },
+      "webhooks": {
+        "status": "not_confirmed",
+        "notes": "Native outbound webhooks were not established from the REST reference and usage policy reviewed. Confirm supported event delivery with BigChange before promising real-time sync.",
+        "source_ids": [
+          "bigchange-1",
+          "bigchange-2"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 client credentials"
+        ],
+        "notes": "Register an application, exchange client ID/secret for a bearer token, and send the customer-id header. Endpoint scopes are required.",
+        "source_ids": [
+          "bigchange-1",
+          "bigchange-3"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Contacts",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "contacts:read and contacts:write govern the corresponding operations.",
+          "source_ids": [
+            "bigchange-3"
+          ]
+        },
+        {
+          "entity": "Persons",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Uses contacts:persons:read/write scopes; consent operations are separately documented.",
+          "source_ids": [
+            "bigchange-4"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Requests can receive 429 and Retry-After; exact allowance is governed by the REST API licence. Reads can lag behind writes because the API is eventually consistent.",
+          "source_ids": [
+            "bigchange-1",
+            "bigchange-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare a contact briefing for a field-service team from authorised customer records.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "bigchange-1",
+          "title": "REST API reference",
+          "url": "https://developers.bigchange.com/docs/rest/api-reference",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "bigchange-2",
+          "title": "Usage policy and licensing",
+          "url": "https://developers.bigchange.com/docs/rest/usage-policy",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "bigchange-3",
+          "title": "Contacts endpoints",
+          "url": "https://developers.bigchange.com/docs/category/rest/api-reference/v-2-0-0/contacts",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "bigchange-4",
+          "title": "Persons endpoints",
+          "url": "https://developers.bigchange.com/docs/category/rest/api-reference/v-2-0-0/persons",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "clickup",
+      "name": "ClickUp",
+      "category": "Work management",
+      "product_scope": "Public API v2, plus separately documented v3 endpoints.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "clickup-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "All ClickUp plans",
+        "notes": "Public API is available on all plans. User/guest management endpoints and some parameters require Enterprise or other higher tiers.",
+        "source_ids": [
+          "clickup-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "API-created subscriptions cover selected Workspace events and locations; webhook delivery follows the creating user’s access.",
+        "source_ids": [
+          "clickup-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal API token",
+          "OAuth 2.0"
+        ],
+        "notes": "Personal tokens for own use; OAuth for apps other people use. Both are permission constrained.",
+        "source_ids": [
+          "clickup-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Tasks",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Supported task fields; custom fields can require a separate endpoint.",
+          "source_ids": [
+            "clickup-1",
+            "clickup-6",
+            "clickup-7"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Per-token requests/minute: Free Forever/Unlimited/Business 100; Business Plus 1,000; Enterprise/Enterprise Plus 10,000.",
+          "source_ids": [
+            "clickup-5"
+          ]
+        },
+        {
+          "text": "If the webhook’s creating user is disabled, it stops triggering. Verify signed events and handle duplicates.",
+          "source_ids": [
+            "clickup-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft task descriptions and suggest due dates from approved client requests.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "clickup-1",
+          "title": "Update task API",
+          "url": "https://developer.clickup.com/reference/updatetask",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-2",
+          "title": "API availability by plan",
+          "url": "https://developer.clickup.com/docs/apis-available-by-plan",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-3",
+          "title": "Webhooks",
+          "url": "https://developer.clickup.com/docs/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-4",
+          "title": "Getting started and authentication",
+          "url": "https://developer.clickup.com/docs/Getting%20Started",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-5",
+          "title": "Rate limits",
+          "url": "https://developer.clickup.com/docs/rate-limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-6",
+          "title": "Create Task",
+          "url": "https://developer.clickup.com/reference/createtask",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "clickup-7",
+          "title": "Get Task",
+          "url": "https://developer.clickup.com/reference/gettask",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "freeagent",
+      "name": "FreeAgent",
+      "category": "Accounting",
+      "product_scope": "Company API v2. Accountancy Practice API uses separate app access.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "freeagent-1"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "FreeAgent company account; exact commercial plan not confirmed",
+        "notes": "Official developer guidance requires a FreeAgent account and sufficient user access. It does not establish a separate minimum paid API tier in the pages reviewed.",
+        "source_ids": [
+          "freeagent-1",
+          "freeagent-2"
+        ]
+      },
+      "webhooks": {
+        "status": "not_confirmed",
+        "notes": "No native outbound webhook facility was established in the reviewed company API documentation. Invoices support updated_since for polling; this is not proof that webhooks are unavailable.",
+        "source_ids": [
+          "freeagent-2",
+          "freeagent-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "Register an app; obtain user consent and maintain access/refresh tokens. Resource access follows the authorised user’s access level.",
+        "source_ids": [
+          "freeagent-2",
+          "freeagent-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Invoices",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Requires the Estimates and Invoices access level; status-specific operations apply.",
+          "source_ids": [
+            "freeagent-3"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "120 requests/minute and 3,600/hour per user; 15 token refreshes/minute. Lists are paginated, with at most 100 items/page.",
+          "source_ids": [
+            "freeagent-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise overdue invoices and prepare follow-up drafts for review.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "freeagent-1",
+          "title": "API overview",
+          "url": "https://dev.freeagent.com/docs/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "freeagent-2",
+          "title": "Introduction, permissions and limits",
+          "url": "https://dev.freeagent.com/docs/introduction",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "freeagent-3",
+          "title": "Invoices reference",
+          "url": "https://dev.freeagent.com/docs/invoices",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "freeagent-4",
+          "title": "OAuth 2.0",
+          "url": "https://dev.freeagent.com/docs/oauth",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "freshdesk",
+      "name": "Freshdesk",
+      "category": "Customer support",
+      "product_scope": "Freshdesk support API v2; not Freshsales or a blanket statement about Freshdesk Omni.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "freshdesk-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Growth, Pro or Enterprise for current API quotas",
+        "notes": "The current support table lists Free at 0 API calls; Growth 100/minute, Pro 400, Enterprise 700. Legacy accounts and trials can differ.",
+        "source_ids": [
+          "freshdesk-2"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "Ticket-update automation rules can call webhooks. Entitlement depends on the account generation and automation features; the reviewed guide lists Growth/Pro/Enterprise.",
+        "source_ids": [
+          "freshdesk-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API key via HTTP Basic"
+        ],
+        "notes": "Authenticate with the agent’s API key over HTTPS. The agent’s role determines allowed operations.",
+        "source_ids": [
+          "freshdesk-1"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Tickets",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Includes ticket updates, replies and notes; endpoint/role restrictions apply.",
+          "source_ids": [
+            "freshdesk-1"
+          ]
+        },
+        {
+          "entity": "Contacts",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Contact operations are documented separately from ticket permissions.",
+          "source_ids": [
+            "freshdesk-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Limits are account-wide, with additional endpoint caps; invalid requests also consume quota. Use the Freshdesk domain, not a custom CNAME.",
+          "source_ids": [
+            "freshdesk-1"
+          ]
+        },
+        {
+          "text": "Automation webhook callbacks have a documented 1,000/hour limit; excess requests are buffered.",
+          "source_ids": [
+            "freshdesk-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Categorise a ticket and propose a priority and reply for a support agent.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "freshdesk-1",
+          "title": "Freshdesk API v2",
+          "url": "https://developers.freshdesk.com/api/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "freshdesk-2",
+          "title": "Current API plan limits",
+          "url": "https://support.freshdesk.com/support/solutions/articles/225439-what-are-the-rate-limits-for-the-api-calls-to-freshdesk-",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "freshdesk-3",
+          "title": "Automation webhooks",
+          "url": "https://support.freshdesk.com/support/solutions/articles/132589-using-webhooks-in-observer",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "google-workspace",
+      "name": "Google Workspace",
+      "category": "Productivity",
+      "product_scope": "Google Drive API as the documented example. Gmail, Calendar and Sheets have separate APIs and quotas.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "google-workspace-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Account with access to the relevant Google Drive files",
+        "notes": "Standard Drive API usage is currently available without an additional API charge. Workspace feature entitlements and administrator policies still apply; this entry does not establish access to every Workspace API.",
+        "source_ids": [
+          "google-workspace-2",
+          "google-workspace-3"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Drive files/changes can send HTTPS push notifications. A notification signals a change; retrieve the current resource through the API.",
+        "source_ids": [
+          "google-workspace-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "Scopes determine file access. Prefer drive.file for files explicitly used by the app; broader restricted scopes may require additional verification.",
+        "source_ids": [
+          "google-workspace-3"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Drive files",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "File content/metadata operations depend on OAuth scope and the user’s file permissions.",
+          "source_ids": [
+            "google-workspace-1",
+            "google-workspace-3"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Drive quotas changed for new projects from 1 May 2026; some existing projects retain earlier quotas. Check the project quota instead of assuming a universal request count.",
+          "source_ids": [
+            "google-workspace-2"
+          ]
+        },
+        {
+          "text": "Watch channels expire: up to 1 day for files and 1 week for changes; renew them.",
+          "source_ids": [
+            "google-workspace-4"
+          ]
+        }
+      ],
+      "ai_use_case": "Find approved project documents and draft an answer with links back to the originals.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "google-workspace-1",
+          "title": "Drive files reference",
+          "url": "https://developers.google.com/workspace/drive/api/reference/rest/v3/files",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "google-workspace-2",
+          "title": "Drive API usage limits",
+          "url": "https://developers.google.com/workspace/drive/api/guides/limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "google-workspace-3",
+          "title": "Choose Drive scopes",
+          "url": "https://developers.google.com/workspace/drive/api/guides/api-specific-auth",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "google-workspace-4",
+          "title": "Drive push notifications",
+          "url": "https://developers.google.com/workspace/drive/api/guides/push",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot",
+      "category": "CRM",
+      "product_scope": "CRM APIs and app event subscriptions. Workflow webhook actions are a separate feature.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "hubspot-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free and paid tiers for core APIs",
+        "notes": "Free/Starter, Professional and Enterprise have documented private-app quotas. Access to a particular object or premium feature still depends on the account subscription and scopes.",
+        "source_ids": [
+          "hubspot-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Project-based apps can subscribe to CRM events. Service Keys do not support webhooks; use an app with webhook support.",
+        "source_ids": [
+          "hubspot-3",
+          "hubspot-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0",
+          "App static token",
+          "Service Key"
+        ],
+        "notes": "OAuth for distributed apps; scoped static credentials for a single account. Service Keys are described as public beta and require Developer Tools access.",
+        "source_ids": [
+          "hubspot-2",
+          "hubspot-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Contacts",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Core CRM contact properties; premium properties/features can have separate entitlements.",
+          "source_ids": [
+            "hubspot-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Private apps on Free/Starter: 100 requests/10 seconds per app and 250,000/day shared by the account. Search and other APIs have separate limits.",
+          "source_ids": [
+            "hubspot-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft a contact summary and propose CRM property updates after a meeting.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "hubspot-1",
+          "title": "CRM contacts API",
+          "url": "https://developers.hubspot.com/docs/api-reference/legacy/crm/objects/contacts/guide",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "hubspot-2",
+          "title": "API usage guidelines",
+          "url": "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "hubspot-3",
+          "title": "Configure app webhooks",
+          "url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/features/configure-webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "hubspot-4",
+          "title": "Service Keys public beta",
+          "url": "https://developers.hubspot.com/changelog/service-keys",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "jira-cloud",
+      "name": "Jira Cloud",
+      "category": "Work management",
+      "product_scope": "Jira Cloud platform REST API v3. Jira Data Center is outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "jira-cloud-1"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Jira Cloud site; minimum paid edition not established",
+        "notes": "API access follows scopes, project permissions and app access policies. The reviewed references do not establish a separate minimum paid edition for core issue operations.",
+        "source_ids": [
+          "jira-cloud-1",
+          "jira-cloud-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Issue/comment events can be delivered to webhook endpoints. REST-registered dynamic webhooks for OAuth apps expire after 30 days unless renewed.",
+        "source_ids": [
+          "jira-cloud-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 (3LO)",
+          "API token via HTTP Basic",
+          "Forge app scopes"
+        ],
+        "notes": "Use OAuth for third-party integrations. Personal scripts can use email plus an API token; access remains limited by the user’s permissions.",
+        "source_ids": [
+          "jira-cloud-2",
+          "jira-cloud-5"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Issues",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Browse/Create/Edit permissions and field configuration constrain each operation; rich text uses Atlassian Document Format.",
+          "source_ids": [
+            "jira-cloud-1",
+            "jira-cloud-2"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Since March 2026, Forge/Connect/OAuth apps use points-based and tiered quotas as well as burst/per-issue limits. API-token traffic retains existing burst limits.",
+          "source_ids": [
+            "jira-cloud-4"
+          ]
+        },
+        {
+          "text": "OAuth apps can register 5 dynamic webhooks per app/user/tenant. Renew expiring registrations and implement supported event filters.",
+          "source_ids": [
+            "jira-cloud-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise a project issue and draft an update or new issue from approved support notes.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "jira-cloud-1",
+          "title": "Issues REST reference",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "jira-cloud-2",
+          "title": "API authentication and permissions",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "jira-cloud-3",
+          "title": "Webhooks",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/webhooks/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "jira-cloud-4",
+          "title": "Rate limiting",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/rate-limiting/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "jira-cloud-5",
+          "title": "Basic authentication",
+          "url": "https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "klaviyo",
+      "name": "Klaviyo",
+      "category": "Marketing",
+      "product_scope": "Server-side Profiles/Lists/Events APIs and system webhooks. Flow webhooks are distinct.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "klaviyo-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Account with API permissions; Advanced KDP/app partner for system webhooks",
+        "notes": "Core API key access is role/scope based. System Webhooks API is restricted to Advanced KDP customers and Klaviyo app partners; do not assume a normal email plan includes it.",
+        "source_ids": [
+          "klaviyo-2",
+          "klaviyo-3"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "System webhooks cover supported email/SMS/push/review/consent events. Flow webhooks are separately configured actions.",
+        "source_ids": [
+          "klaviyo-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Private API key",
+          "OAuth 2.0"
+        ],
+        "notes": "Use scoped private keys or OAuth for server-side data. Public site IDs are only for the client-side API, not secure profile retrieval.",
+        "source_ids": [
+          "klaviyo-2"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Profiles",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Profile properties can be maintained through the API; subscriptions/consent use dedicated operations.",
+          "source_ids": [
+            "klaviyo-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "At most 10 system webhooks per account; activation can take up to 3 minutes. OAuth app webhooks are scoped to that app.",
+          "source_ids": [
+            "klaviyo-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Enrich approved customer profile attributes for segmentation while preserving consent.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "klaviyo-1",
+          "title": "Profiles API overview",
+          "url": "https://developers.klaviyo.com/en/reference/profiles_api_overview",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "klaviyo-2",
+          "title": "Authenticate API requests",
+          "url": "https://developers.klaviyo.com/en/v2026-01-15/docs/authenticate_",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "klaviyo-3",
+          "title": "System Webhooks API overview",
+          "url": "https://developers.klaviyo.com/en/reference/webhooks_api_overview",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "mailchimp",
+      "name": "Mailchimp",
+      "category": "Marketing",
+      "product_scope": "Marketing API v3. Transactional email is a separate product.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "mailchimp-1"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Mailchimp account; operation-specific plan entitlement",
+        "notes": "The developer overview requires an account but does not establish one minimum paid tier for all operations. Sending, automation and audience limits remain plan dependent.",
+        "source_ids": [
+          "mailchimp-1"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Audience webhooks can notify about subscription/profile/email changes and campaign sending. Not every analytics event is an audience webhook.",
+        "source_ids": [
+          "mailchimp-2"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API key",
+          "OAuth 2.0"
+        ],
+        "notes": "API keys for your own account; OAuth for integrations installed by third parties. Credentials are bounded by the authorising user’s role.",
+        "source_ids": [
+          "mailchimp-3"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Audience contacts",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Import/export and update audience members; subscription status must reflect actual consent.",
+          "source_ids": [
+            "mailchimp-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Marketing API: 10 simultaneous connections per user and a 120-second timeout. Batch requests have additional queue limits.",
+          "source_ids": [
+            "mailchimp-4"
+          ]
+        }
+      ],
+      "ai_use_case": "Suggest audience tags from approved CRM attributes without changing marketing consent.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "mailchimp-1",
+          "title": "Marketing API overview",
+          "url": "https://mailchimp.com/developer/marketing",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "mailchimp-2",
+          "title": "Audience webhooks",
+          "url": "https://mailchimp.com/developer/marketing/api-concepts/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "mailchimp-3",
+          "title": "API authentication",
+          "url": "https://mailchimp.com/developer/marketing/api-concepts/authentication",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "mailchimp-4",
+          "title": "Rate limits",
+          "url": "https://mailchimp.com/developer/marketing/api-concepts/rate-limits-and-timeouts",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "microsoft-365",
+      "name": "Microsoft 365",
+      "category": "Productivity",
+      "product_scope": "Microsoft Graph: Outlook mail/calendar and SharePoint/OneDrive files. Other Graph products may have different licensing.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "microsoft-365-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Licence for the underlying Microsoft 365 workload",
+        "notes": "There is no single plan entitlement covering every Graph API. Verify the Exchange, SharePoint or other workload licence and endpoint requirements for the tenant.",
+        "source_ids": [
+          "microsoft-365-1",
+          "microsoft-365-4"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Graph change notifications support selected resources including Outlook messages/events and drive items; subscriptions expire and need renewal.",
+        "source_ids": [
+          "microsoft-365-2",
+          "microsoft-365-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 / Microsoft Entra ID"
+        ],
+        "notes": "Delegated access acts for a user; application permissions act without one and generally require admin consent. Request only the scopes for the workload.",
+        "source_ids": [
+          "microsoft-365-1"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Outlook calendar events",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Calendars.ReadWrite permits event creation and changes; mailbox scope matters.",
+          "source_ids": [
+            "microsoft-365-1"
+          ]
+        },
+        {
+          "entity": "Mail messages",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Mail.ReadWrite covers mailbox changes but does not itself permit sending; Mail.Send is separate.",
+          "source_ids": [
+            "microsoft-365-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Outlook supports at most 1,000 active subscriptions per mailbox across all apps. Shared-folder notifications require the appropriate application permission.",
+          "source_ids": [
+            "microsoft-365-2"
+          ]
+        },
+        {
+          "text": "Handle subscription expiry and lifecycle events; do not assume a notification subscription is permanent.",
+          "source_ids": [
+            "microsoft-365-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft a meeting briefing from authorised calendar and mailbox content.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "microsoft-365-1",
+          "title": "Graph permissions reference",
+          "url": "https://learn.microsoft.com/graph/permissions-reference",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "microsoft-365-2",
+          "title": "Outlook change notifications",
+          "url": "https://learn.microsoft.com/en-us/graph/outlook-change-notifications-overview",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "microsoft-365-3",
+          "title": "Subscription resource",
+          "url": "https://learn.microsoft.com/en-us/graph/api/resources/subscription?view=graph-rest-1.0",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "microsoft-365-4",
+          "title": "Licences and service entitlements",
+          "url": "https://learn.microsoft.com/en-us/microsoft-365/enterprise/view-licenses-and-services-with-microsoft-365-powershell?view=o365-worldwide",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "monday",
+      "name": "monday.com",
+      "category": "Work management",
+      "product_scope": "Platform GraphQL API; API-created webhooks are separate from automation recipes.",
+      "api": {
+        "status": "documented",
+        "style": "GraphQL",
+        "source_ids": [
+          "monday-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free, Basic, Standard, Pro and Enterprise",
+        "notes": "The platform API is documented as a free feature across plans. Daily allowances vary; individual product features may still be gated.",
+        "source_ids": [
+          "monday-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "The create_webhook mutation subscribes to supported board/item events. The receiver must answer a verification challenge.",
+        "source_ids": [
+          "monday-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal API token",
+          "OAuth 2.0"
+        ],
+        "notes": "Personal tokens mirror the user’s board, item and column permissions. App integrations can use OAuth tokens.",
+        "source_ids": [
+          "monday-3",
+          "monday-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Board items",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Read/create items; update item column values using the appropriate column mutation and data format.",
+          "source_ids": [
+            "monday-1",
+            "monday-5"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Daily calls: 1,000 on Free/Basic/Standard; 10,000 Pro; 25,000 Enterprise. Complexity, minute and concurrency budgets apply separately.",
+          "source_ids": [
+            "monday-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Classify an incoming work request and propose an item with status and owner.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "monday-1",
+          "title": "Items reference",
+          "url": "https://developer.monday.com/api-reference/reference/items",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "monday-2",
+          "title": "Rate limits and plans",
+          "url": "https://developer.monday.com/api-reference/docs/rate-limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "monday-3",
+          "title": "Webhooks",
+          "url": "https://developer.monday.com/api-reference/reference/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "monday-4",
+          "title": "Authentication",
+          "url": "https://developer.monday.com/api-reference/docs/authentication",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "monday-5",
+          "title": "Change column values",
+          "url": "https://developer.monday.com/api-reference/reference/columns",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "category": "Productivity",
+      "product_scope": "Notion public content API; administrative APIs have separate scope.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "notion-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free and paid workspaces",
+        "notes": "The API has quotas for all plans. Business/Enterprise receive higher connection limits; workspace content limits still apply.",
+        "source_ids": [
+          "notion-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Connections can receive page, database and other supported change events. Payloads identify changes; fetch content separately.",
+        "source_ids": [
+          "notion-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Internal connection token",
+          "Personal access token",
+          "OAuth 2.0"
+        ],
+        "notes": "Internal connections need pages shared with them; public connections use OAuth. PATs act with their creator’s workspace permissions.",
+        "source_ids": [
+          "notion-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Pages and page properties",
+          "read": true,
+          "create": null,
+          "update": true,
+          "notes": "Content permissions and the selected API version govern operations; some computed properties are not writable. Page creation is outside this entry’s reviewed operation scope.",
+          "source_ids": [
+            "notion-1",
+            "notion-4",
+            "notion-5"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Per connection: 180 requests/minute on other plans and 600/minute on Business/Enterprise. A separate shared workspace budget and endpoint limits also apply.",
+          "source_ids": [
+            "notion-2"
+          ]
+        },
+        {
+          "text": "Maximum request payload: 1,000 block elements and 500 KB; respect Retry-After on throttling.",
+          "source_ids": [
+            "notion-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Turn approved meeting notes into draft project pages and action lists.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "notion-1",
+          "title": "Update page reference",
+          "url": "https://developers.notion.com/reference/patch-page",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "notion-2",
+          "title": "Request limits",
+          "url": "https://developers.notion.com/reference/request-limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "notion-3",
+          "title": "Webhooks",
+          "url": "https://developers.notion.com/reference/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "notion-4",
+          "title": "Authorization",
+          "url": "https://developers.notion.com/guides/get-started/authorization",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "notion-5",
+          "title": "Retrieve a page",
+          "url": "https://developers.notion.com/reference/retrieve-a-page",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "pipedrive",
+      "name": "Pipedrive",
+      "category": "CRM",
+      "product_scope": "Core CRM API and Webhooks v2.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "pipedrive-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Lite, Growth, Premium and Ultimate",
+        "notes": "API access is available to account users by default, but admins can restrict personal API-token access. Plan/seat counts set the token budget.",
+        "source_ids": [
+          "pipedrive-2",
+          "pipedrive-3"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Create/change/delete subscriptions for supported CRM objects. Webhook delivery respects the associated user’s permissions.",
+        "source_ids": [
+          "pipedrive-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API token",
+          "OAuth 2.0"
+        ],
+        "notes": "OAuth is required for Marketplace apps. Personal API tokens use the user’s account permissions.",
+        "source_ids": [
+          "pipedrive-2",
+          "pipedrive-5"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Deals",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Use the current Deals endpoints and required fields.",
+          "source_ids": [
+            "pipedrive-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Burst limits vary by plan and authentication type; Lite personal tokens allow 20 requests/2 seconds. Daily token budgets count endpoint costs, not just HTTP requests.",
+          "source_ids": [
+            "pipedrive-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise a deal and suggest a next action based on approved CRM information.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "pipedrive-1",
+          "title": "Deals reference",
+          "url": "https://developers.pipedrive.com/docs/api/v1/Deals",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "pipedrive-2",
+          "title": "Who can access the API",
+          "url": "https://support.pipedrive.com/en/article/can-all-users-access-the-pipedrive-api",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "pipedrive-3",
+          "title": "Rate limiting",
+          "url": "https://pipedrive.readme.io/docs/core-api-concepts-rate-limiting",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "pipedrive-4",
+          "title": "Webhooks reference",
+          "url": "https://developers.pipedrive.com/docs/api/v1/Webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "pipedrive-5",
+          "title": "OAuth 2.0",
+          "url": "https://developers.pipedrive.com/docs/api/v1/Oauth",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "quickbooks-online",
+      "name": "QuickBooks Online",
+      "category": "Accounting",
+      "product_scope": "QuickBooks Online Accounting REST API. Desktop and Self-Employed are outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "quickbooks-online-1"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "QuickBooks Online company plus Intuit app access; minimum UK plan unconfirmed",
+        "notes": "The reviewed developer pages establish company authorisation and developer-tier quotas, but not a universal minimum UK business subscription. Check the feature entitlement in the target company.",
+        "source_ids": [
+          "quickbooks-online-1",
+          "quickbooks-online-2",
+          "quickbooks-online-3"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Entity-change webhooks include invoices and customers. Production and sandbox subscriptions are configured separately and require the company to authorise the app.",
+        "source_ids": [
+          "quickbooks-online-2"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "Connect each company through OAuth. Validate incoming webhook signatures with the app-specific verifier token.",
+        "source_ids": [
+          "quickbooks-online-2"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Invoices",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Updates require the current SyncToken. Required customer and line fields, locale and company preferences matter.",
+          "source_ids": [
+            "quickbooks-online-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "500 requests/minute per realm and 10/second per realm and app. Builder has 500,000 included CorePlus calls per workspace/month; higher usage depends on the developer programme.",
+          "source_ids": [
+            "quickbooks-online-3"
+          ]
+        },
+        {
+          "text": "Progress invoicing is not supported by the invoice API. Do not treat every UI feature as an API capability.",
+          "source_ids": [
+            "quickbooks-online-1"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise invoice status and prepare proposed line descriptions for an accountant to approve.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "quickbooks-online-1",
+          "title": "Invoice API reference",
+          "url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/invoice",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "quickbooks-online-2",
+          "title": "Configure and verify webhooks",
+          "url": "https://static.developer.intuit.com/output_html/qbo/docs/develop/webhooks/configure-webhooks.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "quickbooks-online-3",
+          "title": "API limits and developer-tier quotas",
+          "url": "https://static.developer.intuit.com/output_html/qbo/docs/learn/limits-and-throttles.html",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "sage-accounting",
+      "name": "Sage Accounting",
+      "category": "Accounting",
+      "product_scope": "Sage Business Cloud Accounting API v3.1 for UK businesses. Sage 50 and Sage Intacct are separate products.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "sage-accounting-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Accounting Start for sales invoices; Standard/Plus for more features",
+        "notes": "Sage documents API differences between Start, Standard and Plus. Purchase invoice and product writes require the relevant higher-tier feature; inventory and multicurrency are Plus features.",
+        "source_ids": [
+          "sage-accounting-2"
+        ]
+      },
+      "webhooks": {
+        "status": "not_confirmed",
+        "notes": "Native outbound webhooks were not established in the reviewed Accounting guides. Confirm event delivery before designing real-time synchronisation.",
+        "source_ids": [
+          "sage-accounting-1",
+          "sage-accounting-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 authorization code"
+        ],
+        "notes": "A user grants readonly or full_access. Use X-Business to select the business; otherwise the lead business is used.",
+        "source_ids": [
+          "sage-accounting-3"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Sales invoices",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Draft/pro forma release and payment allocation use separate operations; invoice state limits changes.",
+          "source_ids": [
+            "sage-accounting-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Access tokens last 5 minutes; refresh tokens last 31 days and must be rotated from the refresh response.",
+          "source_ids": [
+            "sage-accounting-3"
+          ]
+        },
+        {
+          "text": "A draft does not post to the accounts. Marking an invoice paid requires a payment/allocation, not a direct status update.",
+          "source_ids": [
+            "sage-accounting-1"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare draft sales invoices from approved work records, with accounting review before release.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "sage-accounting-1",
+          "title": "Invoicing guide",
+          "url": "https://developer.sage.com/accounting/docs/v1.0.0/guides/learning/key-concepts/invoicing",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "sage-accounting-2",
+          "title": "Plan differences",
+          "url": "https://developer.sage.com/accounting/docs/v1.0.0/guides/learning/key-concepts/differences-between-accounting-and-start",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "sage-accounting-3",
+          "title": "OAuth authentication",
+          "url": "https://developer.sage.com/accounting/docs/v1.0.0/guides/learning/authenticating/authentication",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "sage-accounting-4",
+          "title": "Accounting FAQ",
+          "url": "https://developer.sage.com/accounting/docs/v1.0.0/guides/learning/key-concepts/faq",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "category": "CRM",
+      "product_scope": "Salesforce REST API and Change Data Capture; not a guarantee for every Salesforce product.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "salesforce-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Enterprise, Unlimited, Performance; Professional with API add-on",
+        "notes": "Developer Edition also includes API access for development. The organisation and the user must both have API access enabled. Confirm entitlements on newer or negotiated editions.",
+        "source_ids": [
+          "salesforce-2"
+        ]
+      },
+      "webhooks": {
+        "status": "event_stream",
+        "notes": "Change Data Capture publishes create/update/delete/undelete events through a subscription stream. This is an event-stream option, not a generic outbound HTTP webhook.",
+        "source_ids": [
+          "salesforce-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "An authorised app and user permissions govern access; object and field permissions still apply.",
+        "source_ids": [
+          "salesforce-1",
+          "salesforce-2"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Standard and custom object records",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Only objects/fields exposed to the authorised user; check the specific object’s supported operations.",
+          "source_ids": [
+            "salesforce-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "CDC is documented for Enterprise, Performance, Unlimited and Developer editions. Event delivery allocations and API request allowances must be checked for the organisation.",
+          "source_ids": [
+            "salesforce-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Create a reviewable opportunity summary from the account and its recent activity.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "salesforce-1",
+          "title": "REST API introduction",
+          "url": "https://developer.salesforce.com/docs/platform/api-rest/guide/intro-what-is-rest-api.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "salesforce-2",
+          "title": "API-compatible editions",
+          "url": "https://developer.salesforce.com/docs/platform/api-rest/guide/intro-rest-compatible-editions.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "salesforce-3",
+          "title": "Change Data Capture introduction",
+          "url": "https://developer.salesforce.com/docs/platform/change-data-capture/guide/cdc-intro.html",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "category": "Commerce",
+      "product_scope": "GraphQL Admin API. Storefront API is a separate surface.",
+      "api": {
+        "status": "documented",
+        "style": "GraphQL",
+        "source_ids": [
+          "shopify-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Shopify store with an installed, authorised app",
+        "notes": "Standard plans have a GraphQL Admin quota; Advanced/Plus/enterprise have higher quotas. Access to protected customer fields and specialised APIs has separate requirements.",
+        "source_ids": [
+          "shopify-2",
+          "shopify-3"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "App event subscriptions can deliver order/product and other supported topics over HTTPS. Scopes and protected-data approval affect payloads.",
+        "source_ids": [
+          "shopify-3",
+          "shopify-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 / app access token"
+        ],
+        "notes": "An installed app uses an Admin API access token and approved access scopes. Custom app creation/distribution rules must also be checked.",
+        "source_ids": [
+          "shopify-1"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Products",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "GraphQL product queries and mutations; variant operations and permissions are separate.",
+          "source_ids": [
+            "shopify-1",
+            "shopify-5"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "GraphQL Admin restore rates: Standard 100 cost points/second; Advanced 200; Plus 1,000. A single query may not exceed 1,000 points.",
+          "source_ids": [
+            "shopify-2"
+          ]
+        },
+        {
+          "text": "Unapproved protected customer fields can be redacted; API access alone does not establish permission to retrieve personal data.",
+          "source_ids": [
+            "shopify-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft product descriptions from approved product data for a merchandiser to review.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "shopify-1",
+          "title": "GraphQL Admin API",
+          "url": "https://shopify.dev/docs/api/admin-graphql",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "shopify-2",
+          "title": "GraphQL rate limits",
+          "url": "https://shopify.dev/docs/apps/build/apis/graphql-admin/rate-limits",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "shopify-3",
+          "title": "Protected customer data",
+          "url": "https://shopify.dev/docs/apps/launch/protected-customer-data",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "shopify-4",
+          "title": "Webhooks overview",
+          "url": "https://shopify.dev/docs/apps/build/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "shopify-5",
+          "title": "Product queries and mutations",
+          "url": "https://shopify.dev/docs/api/admin-graphql/latest/objects/Product",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "category": "Productivity",
+      "product_scope": "Web API and outbound Events API. Incoming webhooks only post into Slack.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "slack-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Free and paid workspaces, subject to app permissions and retention",
+        "notes": "API rate tiers apply across Slack plans. Available message history and app installation controls still depend on the workspace.",
+        "source_ids": [
+          "slack-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Events API delivers authorised events to an HTTP endpoint or Socket Mode. Incoming webhooks are a different, write-into-Slack feature.",
+        "source_ids": [
+          "slack-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 / bot or user token"
+        ],
+        "notes": "Scopes and channel membership limit visibility. An app cannot read every private channel merely because it is installed.",
+        "source_ids": [
+          "slack-3",
+          "slack-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Conversation messages",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "History needs the appropriate history scope. Posting/editing requires chat scopes and editing rights for the message.",
+          "source_ids": [
+            "slack-1",
+            "slack-4",
+            "slack-5"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "New commercially distributed non-Marketplace apps have stricter history/replies limits; internal customer-built apps keep the documented Tier 3 history limit.",
+          "source_ids": [
+            "slack-4"
+          ]
+        },
+        {
+          "text": "Events API limit: 30,000 deliveries per workspace, app and hour.",
+          "source_ids": [
+            "slack-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise an opted-in project channel and post a reviewable weekly update.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "slack-1",
+          "title": "chat.update reference",
+          "url": "https://docs.slack.dev/reference/methods/chat.update/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "slack-2",
+          "title": "API rate limits",
+          "url": "https://docs.slack.dev/apis/web-api/rate-limits/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "slack-3",
+          "title": "Events API",
+          "url": "https://docs.slack.dev/apis/events-api/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "slack-4",
+          "title": "Conversation history",
+          "url": "https://docs.slack.dev/reference/methods/conversations.history/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "slack-5",
+          "title": "Post a message",
+          "url": "https://docs.slack.dev/reference/methods/chat.postMessage/",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "trello",
+      "name": "Trello",
+      "category": "Work management",
+      "product_scope": "Trello REST API; not Atlassian Jira APIs.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "trello-1"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Trello account; minimum paid tier not established",
+        "notes": "The reviewed developer pages describe API-key/token access without establishing a minimum paid subscription. Board features and permissions still apply.",
+        "source_ids": [
+          "trello-1",
+          "trello-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Model-change webhooks are bound to a token and can observe only models it can access.",
+        "source_ids": [
+          "trello-2"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API key + user token",
+          "OAuth 2.0"
+        ],
+        "notes": "Use authorisation for the relevant user and boards. Current webhook documentation also describes OAuth 2.0 bearer tokens.",
+        "source_ids": [
+          "trello-2"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Cards",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Read/create/update cards within authorised boards.",
+          "source_ids": [
+            "trello-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "300 requests/10 seconds per API key and 100/10 seconds per token. The members endpoint has an additional limit.",
+          "source_ids": [
+            "trello-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft task cards and labels from approved project notes.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "trello-1",
+          "title": "Cards API",
+          "url": "https://developer.atlassian.com/cloud/trello/rest/api-group-cards/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "trello-2",
+          "title": "Webhooks and authorisation",
+          "url": "https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "trello-3",
+          "title": "Rate limits",
+          "url": "https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "woocommerce",
+      "name": "WooCommerce",
+      "category": "Commerce",
+      "product_scope": "Self-hosted WooCommerce REST API v3; Store API has different access and limits.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "woocommerce-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Core WooCommerce; no separate API subscription",
+        "notes": "The REST API is part of WooCommerce. A working WordPress/WooCommerce site and hosting are required; extensions may add their own paid features.",
+        "source_ids": [
+          "woocommerce-1"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Core webhooks cover order, product, customer and coupon events. Manage them in Advanced settings or the API.",
+        "source_ids": [
+          "woocommerce-2",
+          "woocommerce-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Consumer key + secret"
+        ],
+        "notes": "Use HTTPS and a key with read, write or read/write permission. Access follows the associated WordPress user’s capabilities.",
+        "source_ids": [
+          "woocommerce-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Orders",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "REST resource operations and user permissions apply.",
+          "source_ids": [
+            "woocommerce-1"
+          ]
+        },
+        {
+          "entity": "Products",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Core product resource; extension-specific metadata may need separate handling.",
+          "source_ids": [
+            "woocommerce-3",
+            "woocommerce-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Requires compatible WordPress/WooCommerce versions and non-default permalinks. Host configuration can affect auth headers and allowed HTTP methods.",
+          "source_ids": [
+            "woocommerce-1"
+          ]
+        },
+        {
+          "text": "Webhook delivery can fail or be disabled after repeated failures; monitor deliveries and verify the signature.",
+          "source_ids": [
+            "woocommerce-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare product-copy changes or a customer-service order summary for approval.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "woocommerce-1",
+          "title": "WooCommerce REST API",
+          "url": "https://developer.woocommerce.com/docs/apis/rest-api/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "woocommerce-2",
+          "title": "Advanced settings: webhooks",
+          "url": "https://woocommerce.com/document/configuring-woocommerce-settings/advanced/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "woocommerce-3",
+          "title": "Webhook events and delivery",
+          "url": "https://developer.woocommerce.com/docs/apis/rest-api/v2/webhooks",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "woocommerce-4",
+          "title": "REST authentication",
+          "url": "https://developer.woocommerce.com/docs/apis/rest-api/authentication",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "xero",
+      "name": "Xero",
+      "category": "Accounting",
+      "product_scope": "Accounting API; UK business organisation. Payroll and Practice Manager are outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "xero-1"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Xero organisation + developer tier",
+        "notes": "Developer Starter supports up to 5 connections. A sixth requires Core. These developer tiers are separate from the business accounting subscription; confirm the organisation supports the intended feature.",
+        "source_ids": [
+          "xero-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "App webhooks cover selected events, including contact and invoice creation/updates; not every Accounting API object.",
+        "source_ids": [
+          "xero-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "Use an authorised Xero organisation and the necessary accounting scopes. Request offline_access for ongoing webhook access beyond the initial token lifetime.",
+        "source_ids": [
+          "xero-3"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Invoices",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Write permissions and invoice status affect which changes are allowed.",
+          "source_ids": [
+            "xero-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Current developer FAQ: 1,000 calls/day per organisation on Starter; 5,000 on higher tiers. Also 60/minute and 5 concurrent calls per connection. Older limits FAQs still show 5,000 without the Starter distinction.",
+          "source_ids": [
+            "xero-2"
+          ]
+        },
+        {
+          "text": "Journals and Practice Manager require Advanced tier plus approval; they are not implied by basic Accounting API access.",
+          "source_ids": [
+            "xero-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare draft invoice descriptions from approved job notes, with a person checking the invoice before issue.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "xero-1",
+          "title": "Accounting API: invoices",
+          "url": "https://developer.xero.com/documentation/api/accounting/invoices",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "xero-2",
+          "title": "Developer tiers and current limits",
+          "url": "https://developer.xero.com/faq",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "xero-3",
+          "title": "Webhooks overview",
+          "url": "https://developer.xero.com/documentation/guides/webhooks/overview",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "zendesk",
+      "name": "Zendesk",
+      "category": "Customer support",
+      "product_scope": "Zendesk Support API and webhooks; Chat and other products have separate limits.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "zendesk-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Support Team and higher; Suite quotas vary",
+        "notes": "Support Team API quota is documented. Suite plan allowances differ from standalone Support; check which product the account uses.",
+        "source_ids": [
+          "zendesk-2"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Support events and ticket triggers can send HTTP requests to configured endpoints; a webhook is not a subscription to every possible field change.",
+        "source_ids": [
+          "zendesk-3"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0",
+          "API token (retiring)"
+        ],
+        "notes": "OAuth access tokens are supported. Zendesk says all API tokens stop working on 30 April 2027; use OAuth for new builds.",
+        "source_ids": [
+          "zendesk-4"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Tickets",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Ticket properties/comments subject to role, field and endpoint restrictions.",
+          "source_ids": [
+            "zendesk-1"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Support Team: 200 requests/minute; Professional 400; Enterprise 700. Some endpoints have stricter limits.",
+          "source_ids": [
+            "zendesk-2"
+          ]
+        },
+        {
+          "text": "Trial accounts: at most 10 webhooks and 60 invocations/minute.",
+          "source_ids": [
+            "zendesk-3"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft a support reply using the ticket and approved help content, ready for agent review.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "zendesk-1",
+          "title": "Tickets API",
+          "url": "https://developer.zendesk.com/api-reference/ticketing/tickets/tickets/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zendesk-2",
+          "title": "API rate limits",
+          "url": "https://developer.zendesk.com/api-reference/introduction/rate-limits/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zendesk-3",
+          "title": "Webhooks introduction",
+          "url": "https://developer.zendesk.com/api-reference/webhooks/introduction/",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zendesk-4",
+          "title": "Authentication and token retirement",
+          "url": "https://support.zendesk.com/hc/en-us/articles/4408831452954-How-can-I-authenticate-API-requests",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "zoho-crm",
+      "name": "Zoho CRM",
+      "category": "CRM",
+      "product_scope": "Zoho CRM API v8; workflow webhooks and API notifications are distinct mechanisms.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "zoho-crm-1"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Free and paid editions for core API",
+        "notes": "Free has an API credit allowance. Workflow webhook actions are documented for Professional and higher; do not infer their availability from core API access.",
+        "source_ids": [
+          "zoho-crm-2",
+          "zoho-crm-3"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "Outbound workflow webhooks require the applicable workflow entitlement. Check the separate Notifications API for supported record-change subscriptions.",
+        "source_ids": [
+          "zoho-crm-3",
+          "zoho-crm-4"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0"
+        ],
+        "notes": "Use a token with module/action scopes and the appropriate data-centre API domain. User permissions still apply.",
+        "source_ids": [
+          "zoho-crm-1"
+        ]
+      },
+      "records": [
+        {
+          "entity": "CRM module records",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Examples include leads, contacts and deals; the module and field must support the requested operation.",
+          "source_ids": [
+            "zoho-crm-1",
+            "zoho-crm-5",
+            "zoho-crm-6"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Free: 5,000 API credits in a rolling 24 hours and 5 concurrent calls. Paid credits/concurrency vary by edition. Insert/update/upsert requests allow up to 100 records.",
+          "source_ids": [
+            "zoho-crm-2"
+          ]
+        }
+      ],
+      "ai_use_case": "Classify an enquiry, propose a lead record and route it to the right sales team.",
+      "last_checked": "2026-10-16",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "sources": [
+        {
+          "id": "zoho-crm-1",
+          "title": "Records API overview",
+          "url": "https://www.zoho.com/crm/developer/docs/api/v8/get-records.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zoho-crm-2",
+          "title": "API limits",
+          "url": "https://www.zoho.com/crm/developer/docs/api/v8/api-limits.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zoho-crm-3",
+          "title": "Workflow webhooks",
+          "url": "https://help.zoho.com/portal/en/kb/crm/automate-business-processes/actions/articles/webhooks-workflow",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zoho-crm-4",
+          "title": "Notifications API",
+          "url": "https://www.zoho.com/crm/developer/docs/api/v8/notifications/overview.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zoho-crm-5",
+          "title": "Insert records",
+          "url": "https://www.zoho.com/crm/developer/docs/api/v8/insert-records.html",
+          "checked_at": "2026-10-16"
+        },
+        {
+          "id": "zoho-crm-6",
+          "title": "Update records",
+          "url": "https://www.zoho.com/crm/developer/docs/api/v8/update-records.html",
+          "checked_at": "2026-10-16"
+        }
+      ]
+    }
+  ]
+}
