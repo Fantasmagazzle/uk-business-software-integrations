@@ -1,9 +1,15 @@
 system_id,entity,read,create,update,notes,source_ids,verification_status
 airtable,Table records,true,true,true,Only bases/tables granted to the token; computed fields are not ordinary writable fields.,airtable-1 | airtable-3,not_tested
 asana,Tasks,true,true,true,Task CRUD is documented; access depends on project/workspace permissions.,asana-1,not_tested
+bamboohr,Employees,true,true,true,"Employee listing, creation and update are documented. Some employment-history fields must be changed using their table endpoint instead of the employee update.",bamboo-list | bamboo-create | bamboo-update,not_tested
 bigchange,Contacts,true,true,true,contacts:read and contacts:write govern the corresponding operations.,bigchange-3,not_tested
 bigchange,Persons,true,true,true,Uses contacts:persons:read/write scopes; consent operations are separately documented.,bigchange-4,not_tested
+calendly,Scheduled events,true,unknown,unknown,This review covers retrieving events. Booking and cancellation endpoints exist but are not assessed as general event create/update operations.,calendly-list | calendly-faq,not_tested
+capsule-crm,People and organisations (parties),true,true,true,"Party endpoints support listing, creation and updates; person and organisation fields differ.",capsule-party,not_tested
 clickup,Tasks,true,true,true,Supported task fields; custom fields can require a separate endpoint.,clickup-1 | clickup-6 | clickup-7,not_tested
+docusign,Envelopes,unknown,true,true,"Template creation and selected envelope updates are documented. Draft modifications, sending and voiding have different state requirements; envelope retrieval is not assessed here.",docusign-template | docusign-update,not_tested
+docusign,Envelope recipient status,true,unknown,unknown,Read recipient status/routing and optionally tabs for a selected envelope; recipient write operations are outside this review.,docusign-recipients,not_tested
+erpnext,Permitted business documents (DocTypes),true,true,true,Generic resource CRUD does not guarantee access to every installed DocType or unrestricted business-state transitions.,frappe-rest,not_tested
 freeagent,Invoices,true,true,true,Requires the Estimates and Invoices access level; status-specific operations apply.,freeagent-3,not_tested
 freshdesk,Tickets,true,true,true,"Includes ticket updates, replies and notes; endpoint/role restrictions apply.",freshdesk-1,not_tested
 freshdesk,Contacts,true,true,true,Contact operations are documented separately from ticket permissions.,freshdesk-1,not_tested
@@ -14,14 +20,19 @@ klaviyo,Profiles,true,true,true,Profile properties can be maintained through the
 mailchimp,Audience contacts,true,true,true,Import/export and update audience members; subscription status must reflect actual consent.,mailchimp-1,not_tested
 microsoft-365,Outlook calendar events,true,true,true,Calendars.ReadWrite permits event creation and changes; mailbox scope matters.,microsoft-365-1,not_tested
 microsoft-365,Mail messages,true,true,true,Mail.ReadWrite covers mailbox changes but does not itself permit sending; Mail.Send is separate.,microsoft-365-1,not_tested
+business-central,Customers,true,true,true,"Standard customer resource operations. PATCH requires If-Match and retains omitted fields, although business rules can recalculate related values.",bc-customer | bc-create | bc-update,not_tested
 monday,Board items,true,true,true,Read/create items; update item column values using the appropriate column mutation and data format.,monday-1 | monday-5,not_tested
 notion,Pages and page properties,true,unknown,true,Content permissions and the selected API version govern operations; some computed properties are not writable. Page creation is outside this entry’s reviewed operation scope.,notion-1 | notion-4 | notion-5,not_tested
+odoo,Contacts (res.partner),true,true,true,"search_read, create and write are model methods; fields and access rights depend on the database.",odoo-api | odoo-orm,not_tested
 pipedrive,Deals,true,true,true,Use the current Deals endpoints and required fields.,pipedrive-1,not_tested
 quickbooks-online,Invoices,true,true,true,"Updates require the current SyncToken. Required customer and line fields, locale and company preferences matter.",quickbooks-online-1,not_tested
 sage-accounting,Sales invoices,true,true,true,Draft/pro forma release and payment allocation use separate operations; invoice state limits changes.,sage-accounting-1,not_tested
 salesforce,Standard and custom object records,true,true,true,Only objects/fields exposed to the authorised user; check the specific object’s supported operations.,salesforce-1,not_tested
+servicem8,Jobs,true,true,true,Create and update use POST; update is addressed by job UUID. Required permissions and fields remain endpoint-specific.,servicem8-jobs | servicem8-create | servicem8-update,not_tested
 shopify,Products,true,true,true,GraphQL product queries and mutations; variant operations and permissions are separate.,shopify-1 | shopify-5,not_tested
+simpro,Jobs,true,true,true,"GET lists/retrieves jobs, POST creates and PATCH updates selected fields within a company.",simpro-jobs,not_tested
 slack,Conversation messages,true,true,true,History needs the appropriate history scope. Posting/editing requires chat scopes and editing rights for the message.,slack-1 | slack-4 | slack-5,not_tested
+stripe,Customers,true,true,true,"Customer reads and POST create/update are documented; this does not establish payment, billing or refund capabilities.",stripe-customers | stripe-create,not_tested
 trello,Cards,true,true,true,Read/create/update cards within authorised boards.,trello-1,not_tested
 woocommerce,Orders,true,true,true,REST resource operations and user permissions apply.,woocommerce-1,not_tested
 woocommerce,Products,true,true,true,Core product resource; extension-specific metadata may need separate handling.,woocommerce-3 | woocommerce-1,not_tested

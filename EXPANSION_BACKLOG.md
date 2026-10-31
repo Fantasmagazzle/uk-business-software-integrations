@@ -1,3 +1,5 @@
+> Update 31 October 2026: ServiceM8, Simpro, Capsule CRM, BambooHR and ERPNext have now completed an official-documentation review and entered the catalogue. The connector discovery notes below are retained as provenance, not as a pending queue or evidence of tested connections. Business Central, Odoo, Stripe, Docusign and Calendly were also added.
+
 # Platforms to investigate next
 
 Discovery reviewed 16 October 2026. These are **research candidates, not entries in the verified documentation catalogue**. Connector listings help identify useful systems but do not prove a public API, a particular subscription entitlement or a tested connection. Before adding a row, follow CONTRIBUTING.md and cite the vendor's own documentation.

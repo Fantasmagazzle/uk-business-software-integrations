@@ -11,3 +11,5 @@ Submit an issue or pull request to correct a capability, document a plan restric
 7. Run `python3 scripts/export.py` and `python3 -m unittest discover -s tests`. Include generated CSV changes. Update dataset version and the relevant entry dates only when reviewed.
 
 By submitting original contributions you agree to distribute the catalogue under CC BY 4.0 and code under MIT. Retain source attribution and identify substantive corrections in the pull request. Maintainers check evidence before merging. Commercial integrations and prices can change; a passing data validator does not prove vendor capability.
+
+For an API-shape review, add `api_contract` with version, account-specific base URL template, request/response formats, pagination, and a small selection of cited endpoint methods/paths. Distinguish form encoding, JSON, RPC method calls, status-only responses and resource envelopes. Explain ETags, cursor semantics and scoped quotas in the appropriate notes. Do not infer schemas from connector marketing or label a prose summary a complete OpenAPI schema.

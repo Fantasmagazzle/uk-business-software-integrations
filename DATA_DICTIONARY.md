@@ -1,6 +1,6 @@
 # Data dictionary
 
-Version 1.0.0. UTF-8, ISO `YYYY-MM-DD` dates. Join tables on `id` (systems) = `system_id` (other tables), and source `id` = `source_id` / each `source_ids` member.
+Version 1.1.0. UTF-8, ISO `YYYY-MM-DD` dates. Join tables on `id` (systems) = `system_id` (other tables), and source `id` = `source_id` / each `source_ids` member.
 
 ## Canonical JSON
 
@@ -8,7 +8,7 @@ Version 1.0.0. UTF-8, ISO `YYYY-MM-DD` dates. Join tables on `id` (systems) = `s
 - `canonical_url`, `publisher`, `licence`: attribution and reuse metadata.
 - `selection_method`, `evidence_policy`: sampling and evidence limitations.
 - `systems[].id`: stable, lowercase URL slug. `name`, `category`, `product_scope`: product identity and boundaries.
-- `api.status`: `documented`, `not_confirmed` or `unavailable`; `style`: REST/GraphQL for this scoped entry. Availability never guarantees all operations.
+- `api.status`: `documented`, `not_confirmed` or `unavailable`; `style`: REST/GraphQL/RPC for this scoped entry. Availability never guarantees all operations.
 - `plans.status`: `documented` (named editions in reviewed sources), `conditional` (known entitlement/add-on/contract condition), `not_confirmed` (minimum commercial tier not established). `minimum_plan` is a human-readable summary, not a comparable price or Boolean. `notes` carries qualifications.
 - `webhooks.status`: `http` (documented outbound HTTP notifications), `conditional` (known eligibility restriction), `event_stream` (streaming alternative, not HTTP webhook), `not_confirmed` (unknown), `unavailable` (explicit official evidence of absence). Always read `notes`; HTTP can still require scopes/app setup.
 - `authentication.methods`, `notes`: auth methods and required access for the scoped API. Not credentials.
@@ -27,3 +27,14 @@ Version 1.0.0. UTF-8, ISO `YYYY-MM-DD` dates. Join tables on `id` (systems) = `s
 `capabilities.csv` uses the strings `true`, `false`, `unknown` to avoid silently treating an unknown as false. `source_ids` uses ` | ` separators. `sources.csv` is the complete reference table. `claim_sources.csv` uses zero-based JSON array indexes in `claim_path`; one claim can have multiple sources.
 
 `category_summary.csv` groups systems by category. Webhook columns are mutually exclusive status counts. `tested_connections` counts entries with scoped test evidence, not all possible integrations. Every count describes this editorial sample only. No sampling weights, survey inference, popularity or adoption estimates apply.
+
+## API shapes (additive in 1.1.0)
+
+`systems[].api_contract` is optional. Absence means the API shape has not been reviewed, not that the system has no API. This release includes shapes for the ten new systems; original entry dates and test records are unchanged.
+
+- `version`, `base_url`: scoped API version and URL template; brace placeholders need account-specific values. Endpoint paths are relative to this base.
+- `request_format`, `response_format`, `pagination`: documented protocol and payload summaries, including endpoint-specific qualifications.
+- `source_ids`: official sources for the contract summary.
+- `endpoints[]`: selected `method`, `path`, `purpose`, `request_shape`, `response_shape` and `source_ids`. Shapes are prose summaries, not executable schemas or a complete field inventory.
+
+`api_contracts.csv` has one row per reviewed API shape; `endpoints.csv` one row per selected operation. Both join on `system_id`. Missing contract rows must not be interpreted as no API support. `claim_sources.csv` includes `api_contract` and zero-based `api_contract.endpoints[i]` paths. Endpoint examples inherit the system verification status; they are not live-tested merely because they have documentation.

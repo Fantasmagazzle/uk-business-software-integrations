@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 def validate(d):
-    assert d['schema_version'] == '1.0.0'
+    assert d['schema_version'] == '1.1.0'
     ids = [s['id'] for s in d['systems']]
     assert len(ids) == len(set(ids)) and len(ids) >= 20
     for s in d['systems']:
@@ -24,6 +24,20 @@ def validate(d):
             assert fact['source_ids'] and set(fact['source_ids']) <= refs, (s['id'], fact)
         for r in s['records']:
             assert all(r[k] is None or type(r[k]) is bool for k in ('read','create','update'))
+        contract = s.get('api_contract')
+        if contract is not None:
+            assert all(isinstance(contract.get(k), str) and contract[k].strip() for k in ('version','base_url','request_format','response_format','pagination'))
+            assert contract['base_url'].startswith('https://') and contract['endpoints']
+            assert contract['source_ids'] and set(contract['source_ids']) <= refs
+            pairs = set()
+            for e in contract['endpoints']:
+                assert e['method'] in ('GET','POST','PUT','PATCH','DELETE')
+                assert e['path'].startswith('/')
+                assert all(isinstance(e.get(k), str) and e[k].strip() for k in ('purpose','request_shape','response_shape'))
+                assert e['source_ids'] and set(e['source_ids']) <= refs
+                pair = (e['method'], e['path'])
+                assert pair not in pairs
+                pairs.add(pair)
         v = s['verification']
         assert v['status'] in ('not_tested', 'tested')
         if v['status'] == 'tested':
@@ -38,7 +52,7 @@ def csv_write(path, rows):
 
 def main():
     d=json.loads((ROOT/'data/integrations.json').read_text());validate(d)
-    systems=[];capabilities=[];sources=[];claims=[]
+    systems=[];capabilities=[];sources=[];claims=[];contracts=[];endpoints=[]
     for s in d['systems']:
         systems.append(dict(id=s['id'],name=s['name'],category=s['category'],product_scope=s['product_scope'],api_status=s['api']['status'],api_style=s['api']['style'],plan_status=s['plans']['status'],minimum_plan=s['plans']['minimum_plan'],plan_notes=s['plans']['notes'],webhook_status=s['webhooks']['status'],webhook_notes=s['webhooks']['notes'],authentication_methods=' | '.join(s['authentication']['methods']),authentication_notes=s['authentication']['notes'],limitations=' | '.join(x['text'] for x in s['limitations']),ai_use_case_editorial=s['ai_use_case'],last_checked=s['last_checked'],verification_status=s['verification']['status'],tested_at=s['verification']['tested_at'],test_scope=s['verification']['test_scope'],source_count=len(s['sources']),detail_url=d['canonical_url']+'/'+s['id']))
         for i,r in enumerate(s['records']):
@@ -49,7 +63,14 @@ def main():
         for field in ('records','limitations'):
             for i,v in enumerate(s[field]):
                 claims += [dict(system_id=s['id'],claim_path=f'{field}[{i}]',source_id=r) for r in v['source_ids']]
-    for name,rs in [('systems',systems),('capabilities',capabilities),('sources',sources),('claim_sources',claims)]:
+        c = s.get('api_contract')
+        if c is not None:
+            contracts.append(dict(system_id=s['id'], **{k:v for k,v in c.items() if k not in ('endpoints','source_ids')}, source_ids=' | '.join(c['source_ids']), last_checked=s['last_checked']))
+            claims += [dict(system_id=s['id'],claim_path='api_contract',source_id=r) for r in c['source_ids']]
+            for i,e in enumerate(c['endpoints']):
+                endpoints.append(dict(system_id=s['id'], **{k:v for k,v in e.items() if k != 'source_ids'}, source_ids=' | '.join(e['source_ids']), verification_status=s['verification']['status']))
+                claims += [dict(system_id=s['id'],claim_path=f'api_contract.endpoints[{i}]',source_id=r) for r in e['source_ids']]
+    for name,rs in [('systems',systems),('capabilities',capabilities),('sources',sources),('claim_sources',claims),('api_contracts',contracts),('endpoints',endpoints)]:
         csv_write(ROOT/f'data/{name}.csv',rs)
     groups=[]
     for category in sorted({s['category'] for s in d['systems']}):

@@ -7,10 +7,25 @@ asana,asana-2,Rate limits,https://developers.asana.com/docs/rate-limits,2026-10-
 asana,asana-3,Build an app,https://developers.asana.com/docs/overview,2026-10-16
 asana,asana-4,Webhooks guide,https://developers.asana.com/docs/webhooks-guide,2026-10-16
 asana,asana-5,Authentication,https://developers.asana.com/docs/authentication,2026-10-16
+bamboohr,bamboo-auth,Authentication and getting started,https://documentation.bamboohr.com/docs/getting-started,2026-10-31
+bamboohr,bamboo-list,"List employees: fields, scopes and cursors",https://documentation.bamboohr.com/reference/list-employees,2026-10-31
+bamboohr,bamboo-create,Create an employee,https://documentation.bamboohr.com/reference/create-employee,2026-10-31
+bamboohr,bamboo-update,Update an employee,https://documentation.bamboohr.com/reference/update-employee,2026-10-31
+bamboohr,bamboo-webhooks,Employee webhooks,https://documentation.bamboohr.com/docs/webhooks,2026-10-31
+bamboohr,bamboo-limits,API details and throttling,https://documentation.bamboohr.com/docs/api-details,2026-10-31
 bigchange,bigchange-1,REST API reference,https://developers.bigchange.com/docs/rest/api-reference,2026-10-16
 bigchange,bigchange-2,Usage policy and licensing,https://developers.bigchange.com/docs/rest/usage-policy,2026-10-16
 bigchange,bigchange-3,Contacts endpoints,https://developers.bigchange.com/docs/category/rest/api-reference/v-2-0-0/contacts,2026-10-16
 bigchange,bigchange-4,Persons endpoints,https://developers.bigchange.com/docs/category/rest/api-reference/v-2-0-0/persons,2026-10-16
+calendly,calendly-list,List scheduled events,https://developer.calendly.com/api-docs/calendly-api/scheduled-events/list-scheduled-events,2026-10-31
+calendly,calendly-faq,API and plan frequently asked questions,https://developer.calendly.com/docs/getting-started/frequently-asked-questions,2026-10-31
+calendly,calendly-scopes,Token scopes,https://developer.calendly.com/docs/authentication/scopes,2026-10-31
+calendly,calendly-limits,API rate limits,https://developer.calendly.com/api-docs/overview/rate-limits,2026-10-31
+calendly,calendly-webhooks,Webhook subscriptions,https://developer.calendly.com/docs/api-guides/receive-data-from-scheduled-events-in-real-time-with-webhook-subscriptions,2026-10-31
+capsule-crm,capsule-party,Party resource operations,https://developer.capsulecrm.com/v2/operations/Party,2026-10-31
+capsule-crm,capsule-auth,Authentication and scopes,https://developer.capsulecrm.com/v2/overview/authentication,2026-10-31
+capsule-crm,capsule-limits,Rate limits and API responses,https://developer.capsulecrm.com/v2/overview/handling-api-responses,2026-10-31
+capsule-crm,capsule-webhooks,REST hooks and eligibility,https://developer.capsulecrm.com/v2/overview/avoid-polling-with-rest-hooks,2026-10-31
 clickup,clickup-1,Update task API,https://developer.clickup.com/reference/updatetask,2026-10-16
 clickup,clickup-2,API availability by plan,https://developer.clickup.com/docs/apis-available-by-plan,2026-10-16
 clickup,clickup-3,Webhooks,https://developer.clickup.com/docs/webhooks,2026-10-16
@@ -18,6 +33,13 @@ clickup,clickup-4,Getting started and authentication,https://developer.clickup.c
 clickup,clickup-5,Rate limits,https://developer.clickup.com/docs/rate-limits,2026-10-16
 clickup,clickup-6,Create Task,https://developer.clickup.com/reference/createtask,2026-10-16
 clickup,clickup-7,Get Task,https://developer.clickup.com/reference/gettask,2026-10-16
+docusign,docusign-template,Request a signature using a template,https://developers.docusign.com/docs/esign-rest-api/how-to/request-signature-template-remote/,2026-10-31
+docusign,docusign-update,Update an envelope,https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopes/update/,2026-10-31
+docusign,docusign-recipients,List envelope recipients,https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/enveloperecipients/list/,2026-10-31
+docusign,docusign-live,Integration keys and production approval,https://developers.docusign.com/platform/create-ik-developer-console/,2026-10-31
+docusign,docusign-webhooks,Connect webhooks and polling restrictions,https://developers.docusign.com/platform/webhooks/connect/,2026-10-31
+erpnext,frappe-rest,Frappe resource REST API,https://docs.frappe.io/framework/user/en/api/rest,2026-10-31
+erpnext,frappe-webhooks,Frappe webhook configuration,https://docs.frappe.io/framework/user/en/guides/integration/webhooks,2026-10-31
 freeagent,freeagent-1,API overview,https://dev.freeagent.com/docs/,2026-10-16
 freeagent,freeagent-2,"Introduction, permissions and limits",https://dev.freeagent.com/docs/introduction,2026-10-16
 freeagent,freeagent-3,Invoices reference,https://dev.freeagent.com/docs/invoices,2026-10-16
@@ -49,6 +71,13 @@ microsoft-365,microsoft-365-1,Graph permissions reference,https://learn.microsof
 microsoft-365,microsoft-365-2,Outlook change notifications,https://learn.microsoft.com/en-us/graph/outlook-change-notifications-overview,2026-10-16
 microsoft-365,microsoft-365-3,Subscription resource,https://learn.microsoft.com/en-us/graph/api/resources/subscription?view=graph-rest-1.0,2026-10-16
 microsoft-365,microsoft-365-4,Licences and service entitlements,https://learn.microsoft.com/en-us/microsoft-365/enterprise/view-licenses-and-services-with-microsoft-365-powershell?view=o365-worldwide,2026-10-16
+business-central,bc-auth,Service-to-service authentication and permissions,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication,2026-10-31
+business-central,bc-customer,Customer resource,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/resources/dynamics_customer,2026-10-31
+business-central,bc-create,Create customer,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/api/dynamics_customer_create,2026-10-31
+business-central,bc-update,Update customer,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/api/dynamics_customer_update,2026-10-31
+business-central,bc-webhooks,Webhook subscriptions,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-connect-apps-delta,2026-10-31
+business-central,bc-limits,Business Central online operational limits,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/operational-limits-online,2026-10-31
+business-central,bc-pagination,OData paging,https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/server-driven-paging-in-odata-web-services,2026-10-31
 monday,monday-1,Items reference,https://developer.monday.com/api-reference/reference/items,2026-10-16
 monday,monday-2,Rate limits and plans,https://developer.monday.com/api-reference/docs/rate-limits,2026-10-16
 monday,monday-3,Webhooks,https://developer.monday.com/api-reference/reference/webhooks,2026-10-16
@@ -59,6 +88,9 @@ notion,notion-2,Request limits,https://developers.notion.com/reference/request-l
 notion,notion-3,Webhooks,https://developers.notion.com/reference/webhooks,2026-10-16
 notion,notion-4,Authorization,https://developers.notion.com/guides/get-started/authorization,2026-10-16
 notion,notion-5,Retrieve a page,https://developers.notion.com/reference/retrieve-a-page,2026-10-16
+odoo,odoo-api,Odoo 19 external JSON-2 API,https://www.odoo.com/documentation/19.0/developer/reference/external_api.html,2026-10-31
+odoo,odoo-orm,"ORM search, create and write methods",https://www.odoo.com/documentation/19.0/developer/reference/backend/orm.html,2026-10-31
+odoo,odoo-webhooks,Studio automation actions,https://www.odoo.com/documentation/19.0/applications/studio/automated_actions.html,2026-10-31
 pipedrive,pipedrive-1,Deals reference,https://developers.pipedrive.com/docs/api/v1/Deals,2026-10-16
 pipedrive,pipedrive-2,Who can access the API,https://support.pipedrive.com/en/article/can-all-users-access-the-pipedrive-api,2026-10-16
 pipedrive,pipedrive-3,Rate limiting,https://pipedrive.readme.io/docs/core-api-concepts-rate-limiting,2026-10-16
@@ -74,16 +106,33 @@ sage-accounting,sage-accounting-4,Accounting FAQ,https://developer.sage.com/acco
 salesforce,salesforce-1,REST API introduction,https://developer.salesforce.com/docs/platform/api-rest/guide/intro-what-is-rest-api.html,2026-10-16
 salesforce,salesforce-2,API-compatible editions,https://developer.salesforce.com/docs/platform/api-rest/guide/intro-rest-compatible-editions.html,2026-10-16
 salesforce,salesforce-3,Change Data Capture introduction,https://developer.salesforce.com/docs/platform/change-data-capture/guide/cdc-intro.html,2026-10-16
+servicem8,servicem8-auth,Authentication and access,https://developer.servicem8.com/docs/authentication,2026-10-31
+servicem8,servicem8-jobs,List jobs,https://developer.servicem8.com/reference/listjobs,2026-10-31
+servicem8,servicem8-create,Create a job,https://developer.servicem8.com/reference/createjobs,2026-10-31
+servicem8,servicem8-update,Update a job,https://developer.servicem8.com/reference/updatejobs,2026-10-31
+servicem8,servicem8-pagination,Cursor pagination,https://developer.servicem8.com/docs/pagination,2026-10-31
+servicem8,servicem8-webhooks,Object webhooks,https://developer.servicem8.com/docs/webhooks-overview,2026-10-31
 shopify,shopify-1,GraphQL Admin API,https://shopify.dev/docs/api/admin-graphql,2026-10-16
 shopify,shopify-2,GraphQL rate limits,https://shopify.dev/docs/apps/build/apis/graphql-admin/rate-limits,2026-10-16
 shopify,shopify-3,Protected customer data,https://shopify.dev/docs/apps/launch/protected-customer-data,2026-10-16
 shopify,shopify-4,Webhooks overview,https://shopify.dev/docs/apps/build/webhooks,2026-10-16
 shopify,shopify-5,Product queries and mutations,https://shopify.dev/docs/api/admin-graphql/latest/objects/Product,2026-10-16
+simpro,simpro-auth,Authentication grant types,https://developer.simprogroup.com/apidoc/?page=b0d64c044a432c8e0f9f01e0641d5596,2026-10-31
+simpro,simpro-jobs,Job operations and schemas,https://developer.simprogroup.com/apidoc/?page=12ceff2290bb9039beaa8f36d5dec226,2026-10-31
+simpro,simpro-advanced,"Pagination, company scope and error formats",https://developer.simprogroup.com/apidoc/?page=07adc9c3c19b7c17e7309e86c22161a2,2026-10-31
+simpro,simpro-webhooks,Webhook subscriptions and signatures,https://developer.simprogroup.com/apidoc/?page=cd8682773ab1b07fdc9661984e281ce3,2026-10-31
+simpro,simpro-limits,API call limits,https://developer.simprogroup.com/apidoc/?page=ed8457e003ba0f6197756eca5a61fde9,2026-10-31
 slack,slack-1,chat.update reference,https://docs.slack.dev/reference/methods/chat.update/,2026-10-16
 slack,slack-2,API rate limits,https://docs.slack.dev/apis/web-api/rate-limits/,2026-10-16
 slack,slack-3,Events API,https://docs.slack.dev/apis/events-api/,2026-10-16
 slack,slack-4,Conversation history,https://docs.slack.dev/reference/methods/conversations.history/,2026-10-16
 slack,slack-5,Post a message,https://docs.slack.dev/reference/methods/chat.postMessage/,2026-10-16
+stripe,stripe-keys,"API keys, environments and permissions",https://docs.stripe.com/keys,2026-10-31
+stripe,stripe-customers,Customer API operations,https://docs.stripe.com/api/customers,2026-10-31
+stripe,stripe-create,Create a customer,https://docs.stripe.com/api/customers/create,2026-10-31
+stripe,stripe-pagination,v1 cursor pagination,https://docs.stripe.com/api/pagination,2026-10-31
+stripe,stripe-limits,Rate and concurrency limits,https://docs.stripe.com/rate-limits,2026-10-31
+stripe,stripe-webhooks,Webhook delivery and signature verification,https://docs.stripe.com/webhooks,2026-10-31
 trello,trello-1,Cards API,https://developer.atlassian.com/cloud/trello/rest/api-group-cards/,2026-10-16
 trello,trello-2,Webhooks and authorisation,https://developer.atlassian.com/cloud/trello/guides/rest-api/webhooks/,2026-10-16
 trello,trello-3,Rate limits,https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/,2026-10-16

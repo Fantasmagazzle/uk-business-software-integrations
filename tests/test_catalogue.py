@@ -11,6 +11,24 @@ class CatalogueTests(unittest.TestCase):
     def test_dangling_citation_is_rejected(self):
         self.d['systems'][0]['plans']['source_ids']=['missing-source']
         with self.assertRaises(AssertionError):exporter.validate(self.d)
+    def test_endpoint_citations_and_methods_are_validated(self):
+        s=next(s for s in self.d['systems'] if 'api_contract' in s)
+        e=s['api_contract']['endpoints'][0]
+        sources=e['source_ids']
+        e['source_ids']=['missing-source']
+        with self.assertRaises(AssertionError):exporter.validate(self.d)
+        e['source_ids']=sources
+        e['method']='EXECUTE'
+        with self.assertRaises(AssertionError):exporter.validate(self.d)
+    def test_shape_exports_retain_provenance_and_coverage(self):
+        rows=list(csv.DictReader(io.StringIO((ROOT/'data/endpoints.csv').read_text())))
+        expected=[(s,e) for s in self.d['systems'] for e in s.get('api_contract',{}).get('endpoints',[])]
+        self.assertEqual(len(rows),len(expected))
+        for row,(s,e) in zip(rows,expected):
+            self.assertEqual(row['system_id'],s['id'])
+            self.assertEqual(row['source_ids'].split(' | '),e['source_ids'])
+            self.assertEqual(row['verification_status'],s['verification']['status'])
+        self.assertNotIn('api_contract',next(s for s in self.d['systems'] if s['id']=='xero'))
     def test_unknown_is_not_false_in_export(self):
         rows=list(csv.DictReader(io.StringIO((ROOT/'data/capabilities.csv').read_text())))
         index={(r['system_id'],r['entity']):r for r in rows}

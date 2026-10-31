@@ -1,6 +1,6 @@
 # UK Business Software AI Integration Database
 
-**Can we connect AI to the software we already have?** An open, source-linked catalogue of 25 business software systems for UK integration scoping, maintained by [Generativ](https://www.generativ.co.uk/).
+**Can we connect AI to the software we already have?** An open, source-linked catalogue of 35 business software systems for UK integration scoping, maintained by [Generativ](https://www.generativ.co.uk/).
 
 [Search the database](https://www.generativ.co.uk/resources/software-integration-database) · [JSON](data/integrations.json) · [CSV](data/systems.csv) · [Kaggle analysis dataset](https://www.kaggle.com/datasets/hellogenerativ/uk-business-software-ai-integration-database) · [Contribute](CONTRIBUTING.md)
 
@@ -8,7 +8,9 @@
 
 Accounting, CRM, productivity, work management, commerce, customer support, marketing and field service. Each entry records API style, plan restrictions, webhook/event delivery, authentication, selected read/create/update operations, limitations and official documentation.
 
-Documentation reviewed: **16 October 2026**. **No connections in this first release have been tested by Generativ.** The API capability fields describe vendor documentation, not a successful connection or a promise that your tenant is entitled to it. The sample is an editorial selection for UK businesses, not a market-share study, ranking or endorsement. Many products are global; UK tax/localisation and contract details still need checking.
+Catalogue version: **31 October 2026**. Entry-level documentation dates range from 16 to 31 October 2026. **No scoped connection-test evidence is recorded in this dataset.** The API capability fields describe vendor documentation, not a successful connection or a promise that your tenant is entitled to it. The sample is an editorial selection for UK businesses, not a market-share study, ranking or endorsement. Many products are global; UK tax/localisation and contract details still need checking.
+
+The ten additions include documented API shapes: base URLs, versions, request/response formats, pagination and selected endpoint summaries. Original entries without `api_contract` have not yet received this shape review. These summaries are not complete vendor OpenAPI specifications.
 
 ## Files
 
@@ -17,6 +19,8 @@ Documentation reviewed: **16 October 2026**. **No connections in this first rele
 | `data/integrations.json` | Canonical nested dataset, including citations for individual claims |
 | `data/systems.csv` | One row per software system, suitable for filtering |
 | `data/capabilities.csv` | One row per selected record type and its documented operations |
+| `data/api_contracts.csv` | API shape overview for each reviewed system |
+| `data/endpoints.csv` | Selected methods, paths, request and response shapes with source IDs |
 | `data/sources.csv` | One row per official documentation source |
 | `data/claim_sources.csv` | Links claims to their source IDs |
 | `analysis/category_summary.csv` | Descriptive counts within this catalogue only |
@@ -50,7 +54,7 @@ Query the collection with `q`, `category`, `webhooks` or `verification`. Preserv
 
 Original catalogue and analysis: **CC BY 4.0**. Code: **MIT**. Vendor documentation and trademarks remain the property of their owners; this repository links to them and does not license their content. Vendor names do not imply affiliation.
 
-Suggested citation: Generativ (2026), *UK Business Software AI Integration Database*, version 2026-10-16, https://www.generativ.co.uk/resources/software-integration-database. Include the version or access date and identify changes when redistributing.
+Suggested citation: Generativ (2026), *UK Business Software AI Integration Database*, version 2026-10-31, https://www.generativ.co.uk/resources/software-integration-database. Include the version or access date and identify changes when redistributing.
 
 See [contribution instructions](CONTRIBUTING.md) to submit corrections or reproducible test evidence. Updates are reviewed; this is a dated snapshot, not a real-time vendor status feed.
 

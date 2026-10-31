@@ -1,6 +1,6 @@
 {
-  "schema_version": "1.0.0",
-  "dataset_version": "2026-10-16",
+  "schema_version": "1.1.0",
+  "dataset_version": "2026-10-31",
   "title": "UK Business Software AI Integration Database",
   "publisher": "Generativ",
   "canonical_url": "https://www.generativ.co.uk/resources/software-integration-database",
@@ -195,6 +195,166 @@
       ]
     },
     {
+      "id": "bamboohr",
+      "name": "BambooHR",
+      "category": "HR",
+      "product_scope": "BambooHR employee API, including the cursor-paginated employee listing and employee update operation.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "bamboo-list",
+          "bamboo-update"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "API-enabled account and authorised user; tier unconfirmed",
+        "notes": "The reviewed developer documents describe access and permissions, but do not establish a universal minimum paid subscription tier.",
+        "source_ids": [
+          "bamboo-auth"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Global or permissioned webhooks notify employee changes. Permissioned subscriptions follow the creating user’s access. Custom fields are supported; custom tables are not supported by these webhooks.",
+        "source_ids": [
+          "bamboo-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "HTTP Basic with API key",
+          "OAuth 2.0"
+        ],
+        "notes": "API keys act as the associated user: key as Basic username, an arbitrary password such as x. Developer apps can use scoped OAuth. List and write operations require their respective employee and field permissions.",
+        "source_ids": [
+          "bamboo-auth",
+          "bamboo-list",
+          "bamboo-update"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Employees",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Employee listing, creation and update are documented. Some employment-history fields must be changed using their table endpoint instead of the employee update.",
+          "source_ids": [
+            "bamboo-list",
+            "bamboo-create",
+            "bamboo-update"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "The employee listing defaults to 250 records and permits page[limit] up to 2,500; use opaque page[after]/page[before] cursors.",
+          "source_ids": [
+            "bamboo-list"
+          ]
+        },
+        {
+          "text": "Unauthorised fields can be null and listed in _restrictedFields. Filtered or permission-limited totals are not a complete employee headcount.",
+          "source_ids": [
+            "bamboo-list"
+          ]
+        },
+        {
+          "text": "Throttling can return 429; respect Retry-After rather than assuming a fixed universal request allowance.",
+          "source_ids": [
+            "bamboo-limits"
+          ]
+        },
+        {
+          "text": "The update endpoint can ignore an unknown field alias while returning success. Read back the intended fields; employment status history uses a separate table.",
+          "source_ids": [
+            "bamboo-update"
+          ]
+        }
+      ],
+      "ai_use_case": "Build a permission-limited HR briefing and flag incomplete records for review, keeping restricted fields distinct from missing information.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "v1 employee endpoints",
+        "base_url": "https://{companyDomain}.bamboohr.com/api/v1",
+        "request_format": "GET query parameters for lists; employee updates accept a field dictionary in JSON or XML.",
+        "response_format": "Employee listing is JSON with data, meta and _links. The list identifies restricted fields separately.",
+        "pagination": "page[limit] defaults to 250, maximum 2,500; opaque page[after]/page[before], with _links.next and _links.prev.",
+        "source_ids": [
+          "bamboo-list",
+          "bamboo-update"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/employees",
+            "purpose": "List permitted employees",
+            "request_shape": "Optional fields list and page[limit]/cursor query parameters.",
+            "response_shape": "JSON data array, meta.total/meta.page and navigation links; employeeId is the internal ID.",
+            "source_ids": [
+              "bamboo-list"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/employees/{id}",
+            "purpose": "Update employee fields",
+            "request_shape": "JSON or XML dictionary of supported field aliases and values; only specified fields are changed.",
+            "response_shape": "200 success; a successful status alone does not prove every supplied alias was recognised.",
+            "source_ids": [
+              "bamboo-update"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "bamboo-auth",
+          "title": "Authentication and getting started",
+          "url": "https://documentation.bamboohr.com/docs/getting-started",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bamboo-list",
+          "title": "List employees: fields, scopes and cursors",
+          "url": "https://documentation.bamboohr.com/reference/list-employees",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bamboo-create",
+          "title": "Create an employee",
+          "url": "https://documentation.bamboohr.com/reference/create-employee",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bamboo-update",
+          "title": "Update an employee",
+          "url": "https://documentation.bamboohr.com/reference/update-employee",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bamboo-webhooks",
+          "title": "Employee webhooks",
+          "url": "https://documentation.bamboohr.com/docs/webhooks",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bamboo-limits",
+          "title": "API details and throttling",
+          "url": "https://documentation.bamboohr.com/docs/api-details",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
       "id": "bigchange",
       "name": "BigChange",
       "category": "Field service",
@@ -295,6 +455,277 @@
           "title": "Persons endpoints",
           "url": "https://developers.bigchange.com/docs/category/rest/api-reference/v-2-0-0/persons",
           "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "calendly",
+      "name": "Calendly",
+      "category": "Scheduling",
+      "product_scope": "Calendly v2 scheduled-event retrieval and webhook subscriptions. Scheduling API booking operations are outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "calendly-list"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Core API on all plans; webhook subscriptions require Standard, Teams or Enterprise",
+        "notes": "Calendly distinguishes ordinary API access from paid webhook eligibility. Enterprise-only endpoints have additional restrictions. Booking endpoints have separate conditions and are not assessed here.",
+        "source_ids": [
+          "calendly-faq"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "Eligible paid plans can subscribe to invitee.created, invitee.canceled and routing_form_submission.created. Organisation-wide subscriptions depend on the caller’s role and scopes.",
+        "source_ids": [
+          "calendly-webhooks",
+          "calendly-faq"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal access token",
+          "OAuth 2.0"
+        ],
+        "notes": "Use a scoped Bearer token. Scheduled-event listing needs scheduled_events:read; organisation-wide access requires the appropriate administrator/owner role.",
+        "source_ids": [
+          "calendly-scopes",
+          "calendly-list"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Scheduled events",
+          "read": true,
+          "create": null,
+          "update": null,
+          "notes": "This review covers retrieving events. Booking and cancellation endpoints exist but are not assessed as general event create/update operations.",
+          "source_ids": [
+            "calendly-list",
+            "calendly-faq"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "The current default API limits are 500 requests per minute per user for paid plans and 50 for Free. Specific booking and OAuth endpoints have separate limits.",
+          "source_ids": [
+            "calendly-limits"
+          ]
+        },
+        {
+          "text": "Scheduled-event lists have count default 20, maximum 100; use page_token and the response pagination metadata.",
+          "source_ids": [
+            "calendly-list"
+          ]
+        },
+        {
+          "text": "There is no general reschedule API endpoint. Calendly describes using the invitee’s reschedule URL instead.",
+          "source_ids": [
+            "calendly-faq"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare a meeting briefing from authorised event details and route cancellation notifications into the team’s existing workflow.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "v2",
+        "base_url": "https://api.calendly.com",
+        "request_format": "GET query parameters with scoped Bearer authorisation.",
+        "response_format": "JSON collection array plus pagination for scheduled-event lists.",
+        "pagination": "count defaults to 20 and permits up to 100; page_token and pagination.next_page/next_page_token.",
+        "source_ids": [
+          "calendly-list"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/scheduled_events",
+            "purpose": "List scheduled events",
+            "request_shape": "user, organization or group URI filters as permitted, plus count and page_token.",
+            "response_shape": "JSON collection of event objects and pagination navigation.",
+            "source_ids": [
+              "calendly-list"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "calendly-list",
+          "title": "List scheduled events",
+          "url": "https://developer.calendly.com/api-docs/calendly-api/scheduled-events/list-scheduled-events",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "calendly-faq",
+          "title": "API and plan frequently asked questions",
+          "url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "calendly-scopes",
+          "title": "Token scopes",
+          "url": "https://developer.calendly.com/docs/authentication/scopes",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "calendly-limits",
+          "title": "API rate limits",
+          "url": "https://developer.calendly.com/api-docs/overview/rate-limits",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "calendly-webhooks",
+          "title": "Webhook subscriptions",
+          "url": "https://developer.calendly.com/docs/api-guides/receive-data-from-scheduled-events-in-real-time-with-webhook-subscriptions",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "capsule-crm",
+      "name": "Capsule CRM",
+      "category": "CRM",
+      "product_scope": "Capsule API v2; party records (people and organisations) and REST hooks.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "capsule-party"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Minimum commercial tier not established",
+        "notes": "The reviewed authentication and resource documents do not establish a universal minimum subscription plan. Confirm the target account’s entitlement.",
+        "source_ids": [
+          "capsule-auth"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "REST hooks require a registered OAuth application and account administrator permissions; up to 20 subscriptions are supported.",
+        "source_ids": [
+          "capsule-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Personal access token",
+          "OAuth 2.0"
+        ],
+        "notes": "Send a Bearer token. Personal access tokens suit internal use; OAuth apps request read or read write access. A token does not bypass the user’s permissions.",
+        "source_ids": [
+          "capsule-auth"
+        ]
+      },
+      "records": [
+        {
+          "entity": "People and organisations (parties)",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Party endpoints support listing, creation and updates; person and organisation fields differ.",
+          "source_ids": [
+            "capsule-party"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "The documented limit is 4,000 API requests per hour per user. Inspect X-RateLimit-Limit, X-RateLimit-Remaining and X-RateLimit-Reset; 429 indicates throttling.",
+          "source_ids": [
+            "capsule-limits"
+          ]
+        },
+        {
+          "text": "Collections use page/perPage and Link navigation; default perPage is 50 and the maximum is 100.",
+          "source_ids": [
+            "capsule-party"
+          ]
+        },
+        {
+          "text": "REST hooks cannot be inferred from personal-token API access: registered OAuth app and administrator conditions apply.",
+          "source_ids": [
+            "capsule-webhooks"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise a permitted customer record and propose structured contact updates for sales-team approval.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "2",
+        "base_url": "https://api.capsulecrm.com/api/v2",
+        "request_format": "JSON resource dictionaries inside a party wrapper for writes; query parameters for reads.",
+        "response_format": "Lists return a parties array; single-record responses use a party object.",
+        "pagination": "page and perPage (default 50, maximum 100); follow Link rel=next when present.",
+        "source_ids": [
+          "capsule-party"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/parties",
+            "purpose": "List people and organisations",
+            "request_shape": "Optional page and perPage query parameters.",
+            "response_shape": "JSON object with a parties array.",
+            "source_ids": [
+              "capsule-party"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/parties",
+            "purpose": "Create a party",
+            "request_shape": "JSON object with party containing the person or organisation fields and type.",
+            "response_shape": "Created party in the JSON party wrapper.",
+            "source_ids": [
+              "capsule-party"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "capsule-party",
+          "title": "Party resource operations",
+          "url": "https://developer.capsulecrm.com/v2/operations/Party",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "capsule-auth",
+          "title": "Authentication and scopes",
+          "url": "https://developer.capsulecrm.com/v2/overview/authentication",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "capsule-limits",
+          "title": "Rate limits and API responses",
+          "url": "https://developer.capsulecrm.com/v2/overview/handling-api-responses",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "capsule-webhooks",
+          "title": "REST hooks and eligibility",
+          "url": "https://developer.capsulecrm.com/v2/overview/avoid-polling-with-rest-hooks",
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -413,6 +844,287 @@
           "title": "Get Task",
           "url": "https://developer.clickup.com/reference/gettask",
           "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "docusign",
+      "name": "Docusign",
+      "category": "Documents and signatures",
+      "product_scope": "Docusign eSignature REST API v2.1: template-based envelopes, envelope updates and recipient status.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "docusign-template",
+          "docusign-update",
+          "docusign-recipients"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Production API eligibility and integration approval required",
+        "notes": "Developer/demo credentials do not establish production eligibility. Complete the applicable production integration approval and confirm the account’s API/Connect entitlements; a minimum commercial tier was not established.",
+        "source_ids": [
+          "docusign-live",
+          "docusign-webhooks"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "Connect can send HTTPS POST notifications in XML or JSON. Account-, envelope-, recipient- and organisation-level configurations differ; confirm the account’s eligible configuration.",
+        "source_ids": [
+          "docusign-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0 authorisation code",
+          "OAuth 2.0 JWT grant"
+        ],
+        "notes": "Use OAuth Bearer access for an authorised account. Discover the production base URI through user info rather than substituting the demo host. JWT and authorisation-code setup have different consent requirements.",
+        "source_ids": [
+          "docusign-template"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Envelopes",
+          "read": null,
+          "create": true,
+          "update": true,
+          "notes": "Template creation and selected envelope updates are documented. Draft modifications, sending and voiding have different state requirements; envelope retrieval is not assessed here.",
+          "source_ids": [
+            "docusign-template",
+            "docusign-update"
+          ]
+        },
+        {
+          "entity": "Envelope recipient status",
+          "read": true,
+          "create": null,
+          "update": null,
+          "notes": "Read recipient status/routing and optionally tabs for a selected envelope; recipient write operations are outside this review.",
+          "source_ids": [
+            "docusign-recipients"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Do not poll the status of the same envelope or API object more than once every 15 minutes. Connect callbacks reduce polling.",
+          "source_ids": [
+            "docusign-webhooks"
+          ]
+        },
+        {
+          "text": "Envelope updates are state-dependent: draft modification and voiding an in-process envelope are distinct operations.",
+          "source_ids": [
+            "docusign-update"
+          ]
+        },
+        {
+          "text": "Demo and production environments have separate integration setup. Follow the current approval process before relying on production access.",
+          "source_ids": [
+            "docusign-live"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise a signature request for approval and use authorised completion notifications to prepare the next onboarding task.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "eSignature REST 2.1",
+        "base_url": "https://{account-base-host}/restapi/v2.1",
+        "request_format": "JSON envelope definitions with OAuth Bearer authorisation; account and envelope IDs are path parameters.",
+        "response_format": "JSON envelope results and recipient status resources; Connect notification format is configured separately.",
+        "pagination": "The selected operations address one envelope or create one envelope; collection pagination is not assessed.",
+        "source_ids": [
+          "docusign-template",
+          "docusign-recipients"
+        ],
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/accounts/{accountId}/envelopes",
+            "purpose": "Create an envelope from a template",
+            "request_shape": "JSON templateId, templateRoles and status; template role names must match. Sending changes state and can notify recipients.",
+            "response_shape": "JSON envelope summary, including envelopeId and status.",
+            "source_ids": [
+              "docusign-template"
+            ]
+          },
+          {
+            "method": "GET",
+            "path": "/accounts/{accountId}/envelopes/{envelopeId}/recipients",
+            "purpose": "Read recipient status",
+            "request_shape": "Account/envelope IDs in path; optional include_tabs query flag.",
+            "response_shape": "Recipient status resource including currentRoutingOrder.",
+            "source_ids": [
+              "docusign-recipients"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "docusign-template",
+          "title": "Request a signature using a template",
+          "url": "https://developers.docusign.com/docs/esign-rest-api/how-to/request-signature-template-remote/",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "docusign-update",
+          "title": "Update an envelope",
+          "url": "https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/envelopes/update/",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "docusign-recipients",
+          "title": "List envelope recipients",
+          "url": "https://developers.docusign.com/docs/esign-rest-api/reference/envelopes/enveloperecipients/list/",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "docusign-live",
+          "title": "Integration keys and production approval",
+          "url": "https://developers.docusign.com/platform/create-ik-developer-console/",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "docusign-webhooks",
+          "title": "Connect webhooks and polling restrictions",
+          "url": "https://developers.docusign.com/platform/webhooks/connect/",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "id": "erpnext",
+      "name": "ERPNext",
+      "category": "ERP",
+      "product_scope": "ERPNext document access through Frappe REST API v1. Installed DocTypes and permissions vary by site; v2 methods are outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "frappe-rest"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "An accessible ERPNext/Frappe site with authorised document access",
+        "notes": "Frappe documents resource APIs for DocTypes. The reviewed framework docs do not establish a hosting provider’s commercial plan entitlement or support allowance.",
+        "source_ids": [
+          "frappe-rest"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Configure a DocType, document event, condition and destination. Payloads can be JSON or form data. A webhook secret adds X-Frappe-Webhook-Signature, computed with HMAC-SHA256.",
+        "source_ids": [
+          "frappe-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API key and secret",
+          "OAuth 2.0"
+        ],
+        "notes": "Token authentication sends Authorization: token api_key:api_secret. Calls run with the associated user’s roles and permissions. OAuth Bearer access is also documented.",
+        "source_ids": [
+          "frappe-rest"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Permitted business documents (DocTypes)",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Generic resource CRUD does not guarantee access to every installed DocType or unrestricted business-state transitions.",
+          "source_ids": [
+            "frappe-rest"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "List responses default to 20 records and only the name field unless fields are requested. Specify filters and pagination rather than assuming a full dataset.",
+          "source_ids": [
+            "frappe-rest"
+          ]
+        },
+        {
+          "text": "PUT updates supplied fields rather than replacing the whole document. Site-specific permissions and document validation still apply.",
+          "source_ids": [
+            "frappe-rest"
+          ]
+        },
+        {
+          "text": "Webhooks apply only to configured DocTypes, events and conditions. They are not a complete stream of all database changes.",
+          "source_ids": [
+            "frappe-webhooks"
+          ]
+        }
+      ],
+      "ai_use_case": "Summarise permitted operational documents and prepare proposed changes that a user can approve before a document update.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "Frappe REST v1",
+        "base_url": "https://{site}/api",
+        "request_format": "JSON document fields for POST and PUT; URL query parameters include JSON-encoded fields and filters.",
+        "response_format": "Successful resource responses wrap document objects or lists under data.",
+        "pagination": "limit_start and limit_page_length; default list length 20. Request fields explicitly.",
+        "source_ids": [
+          "frappe-rest"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/resource/{doctype}",
+            "purpose": "List documents",
+            "request_shape": "fields and filters as JSON-encoded query parameters, plus limit_start/limit_page_length.",
+            "response_shape": "JSON object containing data: an array of permitted documents.",
+            "source_ids": [
+              "frappe-rest"
+            ]
+          },
+          {
+            "method": "PUT",
+            "path": "/resource/{doctype}/{name}",
+            "purpose": "Update document fields",
+            "request_shape": "JSON dictionary of only the fields to change.",
+            "response_shape": "JSON object containing data: the resulting document.",
+            "source_ids": [
+              "frappe-rest"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "frappe-rest",
+          "title": "Frappe resource REST API",
+          "url": "https://docs.frappe.io/framework/user/en/api/rest",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "frappe-webhooks",
+          "title": "Frappe webhook configuration",
+          "url": "https://docs.frappe.io/framework/user/en/guides/integration/webhooks",
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -1202,6 +1914,165 @@
       ]
     },
     {
+      "id": "business-central",
+      "name": "Microsoft Dynamics 365 Business Central",
+      "category": "ERP",
+      "product_scope": "Business Central online standard API v2.0; customer resources. On-premises configuration is outside this entry.",
+      "api": {
+        "status": "documented",
+        "style": "REST / OData",
+        "source_ids": [
+          "bc-customer",
+          "bc-update"
+        ]
+      },
+      "plans": {
+        "status": "conditional",
+        "minimum_plan": "Licensed Business Central environment with authorised API access",
+        "notes": "Confirm licence eligibility for the intended scenario. An Entra application also needs API permissions, tenant consent and Business Central object permission sets; the reviewed guide is not a commercial edition comparison.",
+        "source_ids": [
+          "bc-auth"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Supported API resources can issue change notifications. Subscription creation and renewal require a validation handshake; subscriptions expire after three days unless renewed.",
+        "source_ids": [
+          "bc-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Microsoft Entra OAuth 2.0"
+        ],
+        "notes": "For service-to-service access, register an Entra application, grant API.ReadWrite.All for business APIs and assign only the required Business Central permission sets. Request tokens with the Business Central .default scope.",
+        "source_ids": [
+          "bc-auth"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Customers",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Standard customer resource operations. PATCH requires If-Match and retains omitted fields, although business rules can recalculate related values.",
+          "source_ids": [
+            "bc-customer",
+            "bc-create",
+            "bc-update"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Online OData requests are limited per user to 6,000 in a five-minute sliding window and five concurrent executing requests; additional queue and environment limits also apply.",
+          "source_ids": [
+            "bc-limits"
+          ]
+        },
+        {
+          "text": "Customer PATCH requires If-Match; a stale ETag prevents the update.",
+          "source_ids": [
+            "bc-update"
+          ]
+        },
+        {
+          "text": "Webhook delivery is delayed/coalesced and is not an immediate event for every individual field change. Renew subscriptions before their three-day expiry.",
+          "source_ids": [
+            "bc-webhooks"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare a customer account briefing and propose contact-detail corrections, using ETags and approval before writing.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "2.0",
+        "base_url": "https://api.businesscentral.dynamics.com/v2.0/{tenantId}/{environment}/api/v2.0",
+        "request_format": "JSON OData resource bodies; Bearer authorisation; If-Match on customer PATCH.",
+        "response_format": "Customer operations return JSON resource objects; OData collections use an envelope.",
+        "pagination": "Server-driven paging applies. Prefer: odata.maxpagesize can request a smaller page; online maximum is 20,000 entities.",
+        "source_ids": [
+          "bc-auth",
+          "bc-create",
+          "bc-update",
+          "bc-pagination"
+        ],
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/companies({companyId})/customers",
+            "purpose": "Create a customer",
+            "request_shape": "JSON customer properties such as displayName and type, within the selected company.",
+            "response_shape": "201 Created with the customer object.",
+            "source_ids": [
+              "bc-create"
+            ]
+          },
+          {
+            "method": "PATCH",
+            "path": "/companies({companyId})/customers({customerId})",
+            "purpose": "Update customer fields",
+            "request_shape": "JSON changed properties plus the required If-Match header.",
+            "response_shape": "200 OK with the updated customer object.",
+            "source_ids": [
+              "bc-update"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "bc-auth",
+          "title": "Service-to-service authentication and permissions",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-customer",
+          "title": "Customer resource",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/resources/dynamics_customer",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-create",
+          "title": "Create customer",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/api/dynamics_customer_create",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-update",
+          "title": "Update customer",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/api/dynamics_customer_update",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-webhooks",
+          "title": "Webhook subscriptions",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-connect-apps-delta",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-limits",
+          "title": "Business Central online operational limits",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/operational-limits-online",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "bc-pagination",
+          "title": "OData paging",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/server-driven-paging-in-odata-web-services",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
       "id": "monday",
       "name": "monday.com",
       "category": "Work management",
@@ -1405,6 +2276,139 @@
           "title": "Retrieve a page",
           "url": "https://developers.notion.com/reference/retrieve-a-page",
           "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "odoo",
+      "name": "Odoo",
+      "category": "ERP",
+      "product_scope": "Odoo 19 JSON-2 external API and Studio automation; hosted commercial plan requirements. Earlier RPC APIs and Community hosting are not assessed.",
+      "api": {
+        "status": "documented",
+        "style": "JSON-2 (RPC over HTTP)",
+        "source_ids": [
+          "odoo-api"
+        ]
+      },
+      "plans": {
+        "status": "documented",
+        "minimum_plan": "Custom plan for hosted external API access",
+        "notes": "Odoo documents external API availability on Custom, excluding One App Free and Standard. This is not a claim about separately managed Community deployments.",
+        "source_ids": [
+          "odoo-api"
+        ]
+      },
+      "webhooks": {
+        "status": "conditional",
+        "notes": "Studio automation rules can send a webhook notification to a URL with selected record fields. This needs a configured automation action; it is not an automatic event feed for every model.",
+        "source_ids": [
+          "odoo-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Bearer API key"
+        ],
+        "notes": "Use a dedicated user API key with only the necessary access rights. X-Odoo-Database selects the database when needed; model and record access rules still apply.",
+        "source_ids": [
+          "odoo-api"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Contacts (res.partner)",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "search_read, create and write are model methods; fields and access rights depend on the database.",
+          "source_ids": [
+            "odoo-api",
+            "odoo-orm"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "JSON-2 is new in Odoo 19. Model methods and fields depend on the database; inspect its /doc reference rather than assuming another installation has identical models.",
+          "source_ids": [
+            "odoo-api"
+          ]
+        },
+        {
+          "text": "Each JSON-2 call runs in its own transaction. Multiple calls do not form one atomic transaction.",
+          "source_ids": [
+            "odoo-api"
+          ]
+        },
+        {
+          "text": "Automation webhook fields and trigger conditions must be configured explicitly; review the selected payload before enabling the rule.",
+          "source_ids": [
+            "odoo-webhooks"
+          ]
+        }
+      ],
+      "ai_use_case": "Produce a contact briefing from permitted partner fields and send proposed record corrections for approval.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "19 / JSON-2",
+        "base_url": "https://{odoo-database-host}/json/2",
+        "request_format": "All model calls use POST with a JSON dictionary of named method arguments, including ids/context where applicable.",
+        "response_format": "The JSON-serialised method result is returned directly; errors use an error object with HTTP 4xx/5xx status.",
+        "pagination": "For search_read, use the ORM domain, fields, offset and limit arguments. This is model pagination, not a REST next-page URL.",
+        "source_ids": [
+          "odoo-api",
+          "odoo-orm"
+        ],
+        "endpoints": [
+          {
+            "method": "POST",
+            "path": "/res.partner/search_read",
+            "purpose": "Search and read contacts",
+            "request_shape": "JSON dictionary with domain filters and fields; optional offset and limit.",
+            "response_shape": "Array of selected contact records, including record IDs.",
+            "source_ids": [
+              "odoo-api",
+              "odoo-orm"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/res.partner/write",
+            "purpose": "Update contacts",
+            "request_shape": "JSON dictionary containing ids and vals; access rules apply to every target record.",
+            "response_shape": "Boolean success result from the ORM write method.",
+            "source_ids": [
+              "odoo-api",
+              "odoo-orm"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "odoo-api",
+          "title": "Odoo 19 external JSON-2 API",
+          "url": "https://www.odoo.com/documentation/19.0/developer/reference/external_api.html",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "odoo-orm",
+          "title": "ORM search, create and write methods",
+          "url": "https://www.odoo.com/documentation/19.0/developer/reference/backend/orm.html",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "odoo-webhooks",
+          "title": "Studio automation actions",
+          "url": "https://www.odoo.com/documentation/19.0/applications/studio/automated_actions.html",
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -1786,6 +2790,159 @@
       ]
     },
     {
+      "id": "servicem8",
+      "name": "ServiceM8",
+      "category": "Field service",
+      "product_scope": "ServiceM8 API 1.0; selected job operations and object webhooks.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "servicem8-jobs"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Minimum subscription tier not established",
+        "notes": "Authentication documentation establishes account/app setup, but not a universal minimum commercial plan. Confirm the customer account entitlement and any usage charges.",
+        "source_ids": [
+          "servicem8-auth"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Object notifications identify the object UUID and changed fields, with a resource URL to retrieve the record. OAuth subscriptions require a challenge response; API-key subscriptions do not.",
+        "source_ids": [
+          "servicem8-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "API key",
+          "OAuth 2.0"
+        ],
+        "notes": "Private integrations can use X-API-Key. Public integrations use OAuth 2.0 and partner registration. Job permissions distinguish read_jobs, create_jobs and manage_jobs.",
+        "source_ids": [
+          "servicem8-auth"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Jobs",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Create and update use POST; update is addressed by job UUID. Required permissions and fields remain endpoint-specific.",
+          "source_ids": [
+            "servicem8-jobs",
+            "servicem8-create",
+            "servicem8-update"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Cursor pages contain up to 1,000 records; start with cursor=-1 and follow the x-next-cursor response header until absent.",
+          "source_ids": [
+            "servicem8-pagination"
+          ]
+        },
+        {
+          "text": "Object callbacks are change notifications, not a complete job snapshot. Fetch the linked resource before using the updated fields.",
+          "source_ids": [
+            "servicem8-webhooks"
+          ]
+        },
+        {
+          "text": "API access can trigger account charges for some operations. A successful authentication does not establish commercial entitlement.",
+          "source_ids": [
+            "servicem8-auth"
+          ]
+        }
+      ],
+      "ai_use_case": "Draft a job summary for a dispatcher from authorised job records, then submit approved corrections through the job update endpoint.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "1.0",
+        "base_url": "https://api.servicem8.com/api_1.0",
+        "request_format": "GET query parameters; POST field payloads follow the selected endpoint reference.",
+        "response_format": "JSON resource arrays for list calls; write results must be interpreted using the endpoint response and headers.",
+        "pagination": "cursor=-1; follow x-next-cursor, up to 1,000 records per page.",
+        "source_ids": [
+          "servicem8-jobs",
+          "servicem8-create",
+          "servicem8-pagination"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/job.json",
+            "purpose": "Read jobs",
+            "request_shape": "Optional $filter and cursor query parameters; no request body.",
+            "response_shape": "Array of job objects; pagination cursor is returned in x-next-cursor.",
+            "source_ids": [
+              "servicem8-jobs",
+              "servicem8-pagination"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/job/{uuid}.json",
+            "purpose": "Update a job",
+            "request_shape": "Job fields to update in the request body, addressed by UUID; consult the reference for accepted fields and encoding.",
+            "response_shape": "200 success; do not assume the response contains a complete updated job.",
+            "source_ids": [
+              "servicem8-update"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "servicem8-auth",
+          "title": "Authentication and access",
+          "url": "https://developer.servicem8.com/docs/authentication",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "servicem8-jobs",
+          "title": "List jobs",
+          "url": "https://developer.servicem8.com/reference/listjobs",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "servicem8-create",
+          "title": "Create a job",
+          "url": "https://developer.servicem8.com/reference/createjobs",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "servicem8-update",
+          "title": "Update a job",
+          "url": "https://developer.servicem8.com/reference/updatejobs",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "servicem8-pagination",
+          "title": "Cursor pagination",
+          "url": "https://developer.servicem8.com/docs/pagination",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "servicem8-webhooks",
+          "title": "Object webhooks",
+          "url": "https://developer.servicem8.com/docs/webhooks-overview",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
       "id": "shopify",
       "name": "Shopify",
       "category": "Commerce",
@@ -1892,6 +3049,150 @@
       ]
     },
     {
+      "id": "simpro",
+      "name": "Simpro",
+      "category": "Field service",
+      "product_scope": "Simpro build-specific REST API v1.0; selected job operations.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "simpro-jobs"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Customer build and application registration required; tier unconfirmed",
+        "notes": "The reviewed API documents describe build access and app registration, but do not establish a minimum commercial subscription tier.",
+        "source_ids": [
+          "simpro-auth"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "An administrator can configure event subscriptions. JSON callbacks carry an action and reference IDs for a subsequent API lookup; verify X-Response-Signature with the configured secret.",
+        "source_ids": [
+          "simpro-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "OAuth 2.0",
+          "API key"
+        ],
+        "notes": "OAuth grants include authorisation code and client credentials. API keys provide persistent access; select a grant appropriate to user-specific or system-wide access and register with the customer build.",
+        "source_ids": [
+          "simpro-auth"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Jobs",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "GET lists/retrieves jobs, POST creates and PATCH updates selected fields within a company.",
+          "source_ids": [
+            "simpro-jobs"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "More than 10 requests per second from an integration to a single client build triggers HTTP 429 until traffic falls below the limit.",
+          "source_ids": [
+            "simpro-limits"
+          ]
+        },
+        {
+          "text": "Lists default to 30 records; pageSize can increase this to 250. Multi-company builds require the correct company ID.",
+          "source_ids": [
+            "simpro-advanced"
+          ]
+        },
+        {
+          "text": "Job PATCH returns 204 without a resource body. Validation errors and fields allowed for creation versus update differ.",
+          "source_ids": [
+            "simpro-jobs"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare a service-job briefing from the job record, then route proposed changes to an operator for approval.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "1.0",
+        "base_url": "https://{customer-build}/api/v1.0",
+        "request_format": "JSON bodies for POST/PATCH; page and pageSize query parameters for lists.",
+        "response_format": "Lists are JSON arrays; individual resources are objects. Successful job PATCH has no response body.",
+        "pagination": "page is the page number; pageSize defaults to 30 and allows up to 250. Inspect Result-Total, Result-Pages and Result-Count headers.",
+        "source_ids": [
+          "simpro-jobs",
+          "simpro-advanced"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/companies/{companyID}/jobs/",
+            "purpose": "List jobs",
+            "request_shape": "Company ID in path; optional page/pageSize query parameters.",
+            "response_shape": "JSON array with job ID, Description and Total fields in the default listing.",
+            "source_ids": [
+              "simpro-jobs",
+              "simpro-advanced"
+            ]
+          },
+          {
+            "method": "PATCH",
+            "path": "/companies/{companyID}/jobs/{jobID}",
+            "purpose": "Update job fields",
+            "request_shape": "JSON object containing supported job fields to change.",
+            "response_shape": "204 No Content on success; invalid input can return 422.",
+            "source_ids": [
+              "simpro-jobs"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "simpro-auth",
+          "title": "Authentication grant types",
+          "url": "https://developer.simprogroup.com/apidoc/?page=b0d64c044a432c8e0f9f01e0641d5596",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "simpro-jobs",
+          "title": "Job operations and schemas",
+          "url": "https://developer.simprogroup.com/apidoc/?page=12ceff2290bb9039beaa8f36d5dec226",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "simpro-advanced",
+          "title": "Pagination, company scope and error formats",
+          "url": "https://developer.simprogroup.com/apidoc/?page=07adc9c3c19b7c17e7309e86c22161a2",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "simpro-webhooks",
+          "title": "Webhook subscriptions and signatures",
+          "url": "https://developer.simprogroup.com/apidoc/?page=cd8682773ab1b07fdc9661984e281ce3",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "simpro-limits",
+          "title": "API call limits",
+          "url": "https://developer.simprogroup.com/apidoc/?page=ed8457e003ba0f6197756eca5a61fde9",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
       "id": "slack",
       "name": "Slack",
       "category": "Productivity",
@@ -1994,6 +3295,158 @@
           "title": "Post a message",
           "url": "https://docs.slack.dev/reference/methods/chat.postMessage/",
           "checked_at": "2026-10-16"
+        }
+      ]
+    },
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "category": "Payments",
+      "product_scope": "Stripe v1 Customer API and event webhooks. Payment execution and v2 API contracts are outside this review.",
+      "api": {
+        "status": "documented",
+        "style": "REST",
+        "source_ids": [
+          "stripe-customers"
+        ]
+      },
+      "plans": {
+        "status": "not_confirmed",
+        "minimum_plan": "Stripe account with appropriate server-side API access",
+        "notes": "The reviewed key documentation establishes account access and key permissions, not a universal pricing plan. Product eligibility, live activation and transaction charges need separate confirmation.",
+        "source_ids": [
+          "stripe-keys"
+        ]
+      },
+      "webhooks": {
+        "status": "http",
+        "notes": "Stripe sends signed HTTPS event callbacks. Verify Stripe-Signature against the original request body and the endpoint secret. Event formats and API versions require explicit handling.",
+        "source_ids": [
+          "stripe-webhooks"
+        ]
+      },
+      "authentication": {
+        "methods": [
+          "Secret API key",
+          "Restricted API key"
+        ],
+        "notes": "Use a server-side secret or restricted key with the required resource permissions. Publishable keys do not provide equivalent server access. Test/sandbox and live credentials are separate.",
+        "source_ids": [
+          "stripe-keys"
+        ]
+      },
+      "records": [
+        {
+          "entity": "Customers",
+          "read": true,
+          "create": true,
+          "update": true,
+          "notes": "Customer reads and POST create/update are documented; this does not establish payment, billing or refund capabilities.",
+          "source_ids": [
+            "stripe-customers",
+            "stripe-create"
+          ]
+        }
+      ],
+      "limitations": [
+        {
+          "text": "Default global limits are 100 operations per second in live mode and 25 in sandbox; endpoints generally default to 25 requests per second, with documented exceptions and additional concurrency limits.",
+          "source_ids": [
+            "stripe-limits"
+          ]
+        },
+        {
+          "text": "429 responses may reflect different limiters. Inspect Stripe-Rate-Limited-Reason and back off rather than treating every 429 as the same quota.",
+          "source_ids": [
+            "stripe-limits"
+          ]
+        },
+        {
+          "text": "v1 cursor pagination uses starting_after or ending_before; limit is 1–100, default 10. These rules do not describe Stripe v2 pagination.",
+          "source_ids": [
+            "stripe-pagination"
+          ]
+        }
+      ],
+      "ai_use_case": "Prepare a customer account summary and propose approved metadata updates without initiating a charge.",
+      "last_checked": "2026-10-31",
+      "verification": {
+        "status": "not_tested",
+        "tested_at": null,
+        "test_scope": null,
+        "evidence_urls": []
+      },
+      "api_contract": {
+        "version": "v1 Customers; account/request API version also applies",
+        "base_url": "https://api.stripe.com/v1",
+        "request_format": "Form-encoded parameters for the selected v1 POST endpoint; query parameters for lists.",
+        "response_format": "Customer objects are JSON. List responses use object=list with data, has_more and url.",
+        "pagination": "starting_after or ending_before cursor; limit 1–100, default 10; inspect has_more.",
+        "source_ids": [
+          "stripe-create",
+          "stripe-customers",
+          "stripe-pagination"
+        ],
+        "endpoints": [
+          {
+            "method": "GET",
+            "path": "/customers",
+            "purpose": "List customers",
+            "request_shape": "Optional limit and cursor query parameters.",
+            "response_shape": "JSON list envelope with data containing Customer objects and has_more.",
+            "source_ids": [
+              "stripe-customers",
+              "stripe-pagination"
+            ]
+          },
+          {
+            "method": "POST",
+            "path": "/customers",
+            "purpose": "Create a customer",
+            "request_shape": "Form-encoded customer parameters such as name, email and metadata.",
+            "response_shape": "JSON Customer object with its id.",
+            "source_ids": [
+              "stripe-create"
+            ]
+          }
+        ]
+      },
+      "sources": [
+        {
+          "id": "stripe-keys",
+          "title": "API keys, environments and permissions",
+          "url": "https://docs.stripe.com/keys",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "stripe-customers",
+          "title": "Customer API operations",
+          "url": "https://docs.stripe.com/api/customers",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "stripe-create",
+          "title": "Create a customer",
+          "url": "https://docs.stripe.com/api/customers/create",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "stripe-pagination",
+          "title": "v1 cursor pagination",
+          "url": "https://docs.stripe.com/api/pagination",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "stripe-limits",
+          "title": "Rate and concurrency limits",
+          "url": "https://docs.stripe.com/rate-limits",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "id": "stripe-webhooks",
+          "title": "Webhook delivery and signature verification",
+          "url": "https://docs.stripe.com/webhooks",
+          "checked_at": "2026-10-31"
         }
       ]
     },
